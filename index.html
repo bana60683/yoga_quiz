@@ -1,439 +1,408 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瑜伽師資培訓 模擬考試</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --success: #2a9d8f;
+            --danger: #e76f51;
+            --bg: #f4f6f8;
+            --card: #ffffff;
+            --text: #2b2d42;
+        }
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>瑜伽哲學與理論 考試重點整理</title>
-    <style>
-        :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #166088;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --accent-color: #e63946;
-            --border-color: #e9ecef;
-        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 20px;
-        }
+        .app-container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--bg);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
 
-        h1 {
-            text-align: center;
-            color: var(--secondary-color);
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
+        h1 { font-size: 1.4rem; color: var(--secondary); margin: 0; }
+        .subtitle { font-size: 0.85rem; color: #6c757d; margin-top: 4px; }
 
-        h2 {
-            color: var(--primary-color);
-            background-color: #f0f4f8;
-            padding: 10px 15px;
-            border-left: 5px solid var(--primary-color);
-            border-radius: 4px;
-            margin-top: 30px;
-        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
 
-        h3 {
-            color: var(--secondary-color);
-            margin-top: 20px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-        }
+        .btn:active { transform: scale(0.98); }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-outline { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
 
-        ul, ol {
-            padding-left: 20px;
-        }
+        .card { display: none; }
+        .card.active { display: block; }
 
-        li {
-            margin-bottom: 8px;
-        }
+        .question-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; }
+        .question-img { width: 100%; max-height: 220px; object-fit: contain; border-radius: 8px; margin-bottom: 12px; background: #eee; }
 
-        .highlight {
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
+        .option-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            text-align: left;
+            width: 100%;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
 
-        .warning {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
+        .option-btn.selected { border-color: var(--primary); background: #eef4fc; }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 0.95em;
-        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
 
-        th, td {
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            text-align: left;
-        }
+        .result-score { text-align: center; font-size: 2.2rem; font-weight: bold; color: var(--primary); margin: 15px 0; }
+        .tag { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; margin-right: 5px; color: white; }
+        .tag-strong { background-color: var(--success); }
+        .tag-weak { background-color: var(--danger); }
 
-        th {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        .asana-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .asana-item {
-            background: #f1f5f9;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 600px) {
-            body { padding: 10px; }
-            .container { padding: 15px; }
-            table { display: block; overflow-x: auto; }
-        }
-    </style>
+        .analysis-item { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 0.9rem; }
+        .progress-bar { height: 6px; background: #e9ecef; border-radius: 3px; margin-bottom: 15px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>瑜伽哲學與理論 考試總整理</h1>
+<div class="app-container">
+    <header>
+        <h1>🧘‍♀️ 瑜伽考試互動刷題網</h1>
+        <div class="subtitle">RYT200 哲學 / 體位法 / 呼吸法 / 脈輪 綜合題庫</div>
+    </header>
 
-    <!-- 一、印度哲學派別與數論哲學 -->
-    <h2>一、印度哲學派別與數論哲學（Sankhya）架構</h2>
-    <h3>1. 六大正統哲學派別（Orthodox，依據《吠陀經》）</h3>
-    <ul>
-        <li><span class="highlight">Sankhya（數論）</span>：創始者為聖哲卡皮拉（Kapil）。與 25 個數字相關，故稱數論。</li>
-        <li><span class="highlight">Yoga（瑜伽）</span>：創始者為 Patanjali（帕坦伽利，修練在實踐端/瑜伽經）。</li>
-        <li><span class="highlight">Nyaya（正理論）</span>：創始者為 Gautama。</li>
-        <li><span class="highlight">Vaisheshik（勝論）</span>：創始者為 Maharshi Kanada。</li>
-        <li><span class="highlight">Mimansa（彌曼差）</span></li>
-        <li><span class="highlight">Vedanta（吠壇多）</span>：創始者為 Shankara Charya。</li>
-    </ul>
-    <p><em>(註：非依據吠陀經的哲學派別稱為 Hetrodox，如：佛教、耆那教、查瓦克 Charmwaka)</em></p>
+    <!-- 1. 開始主頁 -->
+    <div id="home-card" class="card active">
+        <p style="text-align:center;">準備好檢視你的學習成果了嗎？</p>
+        <button class="btn" onclick="startQuiz()">🚀 開始隨機模擬測驗</button>
+        <button class="btn btn-outline" onclick="showEditor()">✏️ 題庫管理 / 新增題目</button>
+    </div>
 
-    <h3>2. 數論哲學 25 演化體系（Purusha 與 Prakriti）</h3>
-    <ul>
-        <li><span class="highlight">Purusha（靈 / 神我）</span>：永恆不變、純粹意識。</li>
-        <li><span class="highlight">Prakriti（原質）</span>：物質世界的根本，誤認與 Purusha 結合後展開演化：
-            <ul>
-                <li><span class="highlight">Mahat（智力 / Intellect）</span>
-                    <ul>
-                        <li><span class="highlight">Ahankara（自我 / Ego / 我執）</span>：向下分化為三性</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
+    <!-- 2. 測驗進行區 -->
+    <div id="quiz-card" class="card">
+        <div class="progress-bar"><div id="progress" class="progress-fill"></div></div>
+        <div id="category-badge" style="font-size:0.8rem; color:#6c757d; margin-bottom:5px;"></div>
+        <div id="question-text" class="question-title"></div>
+        <img id="question-img" class="question-img" src="" style="display:none;" alt="題目圖片">
+        
+        <div id="options-container"></div>
+        <input type="text" id="short-answer-input" placeholder="請輸入答案..." style="display:none;">
 
-    <h3>3. 三性（Gunas）、器官與元素</h3>
-    <ul>
-        <li><span class="highlight">愉悅性（Sattva）</span>：
-            <ul>
-                <li><strong>Manas（心智 / Mind）</strong></li>
-                <li><strong>五感覺器官</strong>：眼、耳、鼻、舌、皮</li>
-                <li><strong>五行動器官</strong>：手、腳、嘴、排泄、生殖</li>
-            </ul>
-        </li>
-        <li><span class="highlight">變性（Rajas）</span>：不產生實體，提供能量與驅動力。</li>
-        <li><span class="highlight">惰性（Tamas）</span>：
-            <ul>
-                <li><strong>五感受 / 感覺</strong>：視覺、聲、氣味、味覺、觸覺</li>
-                <li><strong>五大元素</strong>：空、風、火、水、土</li>
-            </ul>
-        </li>
-    </ul>
+        <button id="next-btn" class="btn" onclick="nextQuestion()">下一題</button>
+    </div>
 
-    <h3>4. 人生的五大問題（解脫對象）</h3>
-    <p>無知、有我、執著、死懼、排斥。</p>
+    <!-- 3. 成績與分析區 -->
+    <div id="result-card" class="card">
+        <h2>測驗結果</h2>
+        <div class="result-score" id="score-text">0 分</div>
+        
+        <h3>📊 強弱項分析</h3>
+        <div id="analysis-tags" style="margin-bottom: 15px;"></div>
 
-    <!-- 二、49 個體位法 -->
-    <h2>二、49 個體位法梵文羅馬拼音（Asana）</h2>
-    <p><em>(老師若要求寫出 10 個，建議優先背誦較簡短或常見者)</em>[cite: 1]</p>
-    <div class="asana-grid">
-        <div class="asana-item">1. Padahastasana (Hand to foot pose / 手觸腳式)[cite: 1]</div>
-        <div class="asana-item">2. Utkatasana (Chair pose / 幻椅式)[cite: 1]</div>
-        <div class="asana-item">3. Utthita Ashwa Sanchalanasana (High Lunge / 高弓步式)[cite: 1]</div>
-        <div class="asana-item">4. Virabhadrasana 1 (Warrior pose 1 / 戰士一式)[cite: 1]</div>
-        <div class="asana-item">5. Virabhadrasana 2 (Warrior pose 2 / 戰士二式)[cite: 1]</div>
-        <div class="asana-item">6. Virabhadrasana 3 (Warrior pose 3 / 戰士三式)[cite: 1]</div>
-        <div class="asana-item">7. Adho Mukha Svanasana (Downward Facing Dog Pose / 下犬式)[cite: 1]</div>
-        <div class="asana-item">8. Phalakasana (Plank Pose / 板式)[cite: 1]</div>
-        <div class="asana-item">9. Chaturanga Dandasana (Four Limb Staff Pose / 四柱支撐式)[cite: 1]</div>
-        <div class="asana-item">10. Ashtanga Namaskara (Eight Limbed Salutation / 八體投地式)[cite: 1]</div>
-        <div class="asana-item">11. Bhujangasana (Cobra Pose / 眼鏡蛇式)[cite: 1]</div>
-        <div class="asana-item">12. Urdhvamukha Svanasana (Upward Facing Dog / 上犬式)[cite: 1]</div>
-        <div class="asana-item">13. Vrikshasana (Tree pose / 樹式)[cite: 1]</div>
-        <div class="asana-item">14. Utthita Hasta Padangusthasana (Extended Hand-to-Big-Toe Pose / 站立手抓大腳趾式)[cite: 1]</div>
-        <div class="asana-item">15. Natarajasana (Lord of the Dance Pose / 舞王式)[cite: 1]</div>
-        <div class="asana-item">16. Garudasana (Eagle Pose / 鷹式)[cite: 1]</div>
-        <div class="asana-item">17. Parsvottanasana (Intense Side Stretch Pose / 金字塔式/側伸展式)[cite: 1]</div>
-        <div class="asana-item">18. Trikonasana (Triangle Pose / 三角式)[cite: 1]</div>
-        <div class="asana-item">19. Parivrtta Trikonasana (Revolved Triangle Pose / 轉體三角式)[cite: 1]</div>
-        <div class="asana-item">20. Prasarita Padottanasana (Wide-Legged Forward Bend / 雙角式)[cite: 1]</div>
-        <div class="asana-item">21. Utthita Parsvakonasana (Extended Side Angle Pose / 側角伸展式)[cite: 1]</div>
-        <div class="asana-item">22. Parivrtta Parsvakonasana (Revolved Side Angle Pose / 扭轉側角式)[cite: 1]</div>
-        <div class="asana-item">23. Supta Virasana (Reclined Hero Pose / 臥英雄式)[cite: 1]</div>
-        <div class="asana-item">24. Bakasana (Crane / Crow Pose / 烏鴉式)[cite: 1]</div>
-        <div class="asana-item">25. Vasisthasana (Side Plank Pose / 側板式)[cite: 1]</div>
-        <div class="asana-item">26. Hanumanasana (Monkey Pose / 神猴哈奴曼式/神猴劈腿式)[cite: 1]</div>
-        <div class="asana-item">27. Dandasana (Staff Pose / 杖式)[cite: 1]</div>
-        <div class="asana-item">28. Gomukhasana (Cow Face Pose / 牛面式)[cite: 1]</div>
-        <div class="asana-item">29. Eka Pada Rajakapotasana (One-Legged King Pigeon Pose / 單腿鴿王式)[cite: 1]</div>
-        <div class="asana-item">30. Ushtrasana (Camel Pose / 駱駝式)[cite: 1]</div>
-        <div class="asana-item">31. Sashankasana (Rabbit Pose / 兔子式)[cite: 1]</div>
-        <div class="asana-item">32. Parighasana (Gate Pose / 門栓式)[cite: 1]</div>
-        <div class="asana-item">33. Janu Sirsasana (Head to Knee Pose / 單腿頭枕膝前屈式)[cite: 1]</div>
-        <div class="asana-item">34. Paschimottanasana (Seated Forward Bend Pose / 坐姿前屈式)[cite: 1]</div>
-        <div class="asana-item">35. Purvottanasana (Intense Frontal Stretch Pose / 反向板式/前部伸展式)[cite: 1]</div>
-        <div class="asana-item">36. Naukasana (Boat Pose / 船式)[cite: 1]</div>
-        <div class="asana-item">37. Ardha Matsyendrasana (Half Spinal Twist Pose / 半脊柱扭轉式)[cite: 1]</div>
-        <div class="asana-item">38. Matsyasana (Fish Pose / 魚式)[cite: 1]</div>
-        <div class="asana-item">39. Dhanurasana (Bow Pose / 弓式)[cite: 1]</div>
-        <div class="asana-item">40. Salabhasana (Locust Pose / 蝗蟲式)[cite: 1]</div>
-        <div class="asana-item">41. Halasana (Plow Pose / 犁式)[cite: 1]</div>
-        <div class="asana-item">42. Sarvangasana (Shoulder Stand Pose / 肩倒立式)[cite: 1]</div>
-        <div class="asana-item">43. Setu Bandhasana (Bridge Pose / 橋式)[cite: 1]</div>
-        <div class="asana-item">44. Chakrasana (Wheel Pose / 輪式)[cite: 1]</div>
-        <div class="asana-item">45. Sirsasana (Headstand Pose / 頭倒立式)[cite: 1]</div>
-        <div class="asana-item">46. Balasana (Child Pose / 嬰兒式)[cite: 1]</div>
-        <div class="asana-item">47. Pincha Mayurasana (Feathered Peacock Pose / 孔雀起舞式/肘倒立)[cite: 1]</div>
-        <div class="asana-item">48. Jathara Parivartanasana (Belly Twist Pose / 腹部扭轉式)[cite: 1]</div>
-        <div class="asana-item">49. Savasana (Corpse Pose / 大休息/大屍式)[cite: 1]</div>
-    </div>
+        <h3>📝 解析總覽</h3>
+        <div id="review-container"></div>
 
-    <!-- 三、六大淨化法 -->
-    <h2>三、六大淨化法（Shatkarma / Shat Kriya）</h2>
-    <ol>
-        <li><strong>Dhauti</strong>（內部淨化法 / 清潔法）[cite: 1]</li>
-        <li><strong>Basti</strong>（灌腸法）[cite: 1]</li>
-        <li><strong>Neti</strong>（洗鼻法）[cite: 1]</li>
-        <li><strong>Nauli</strong>（腹部按摩法）[cite: 1]</li>
-        <li><strong>Kapalbhati</strong>（前額葉淨化法 / 潔腦法）[cite: 1]</li>
-        <li><strong>Trataka</strong>（凝視法）[cite: 1]</li>
-    </ol>
+        <button class="btn" onclick="startQuiz()">🔄 再測驗一次</button>
+        <button class="btn btn-secondary" onclick="showHome()">🏠 回首頁</button>
+    </div>
 
-    <!-- 四、調息法 -->
-    <h2>四、調息法（Pranayama）五大種類、好處與禁忌</h2>
-    <ul>
-        <li>
-            <span class="highlight">1. Nadi Shodhan Pranayama（脈叢淨化呼吸法 / 陰陽呼吸法）</span>
-            <ul>
-                <li><strong>好處</strong>：平衡左右腦與陰陽能量（Ida 與 Pingala 脈），平撫神經系統、減輕壓力與焦慮，提升專注力[cite: 1]。</li>
-                <li><span class="warning">禁忌</span>：無特別嚴格禁忌；嚴重鼻塞時不宜強行鼻吸鼻吐。</li>
-            </ul>
-        </li>
-        <li>
-            <span class="highlight">2. Seetkari Pranayama（嘶聲呼吸法）</span>
-            <ul>
-                <li><strong>好處</strong>：冷卻身體與血液系統、降低體溫與血壓，舒緩憤怒與焦慮，並有助於減緩牙齦問題。</li>
-                <li><span class="warning">禁忌</span>：低血壓患者、哮喘或呼吸道疾病者、嚴重便秘者、氣管過敏者不宜練習。</li>
-            </ul>
-        </li>
-        <li>
-            <span class="highlight">3. Bhramari Pranayama（蜜蜂呼吸法）</span>
-            <ul>
-                <li><strong>好處</strong>：透過蜂鳴聲震動平撫腦神經，緩解緊張、頭痛與失眠，促進睡眠品質並降血壓。</li>
-                <li><span class="warning">禁忌</span>：嚴重耳部感染者、肺部嚴重感染或發炎者不宜練習。</li>
-            </ul>
-        </li>
-        <li>
-            <span class="highlight">4. Ujjai Pranayama（勝利呼吸法）</span>
-            <ul>
-                <li><strong>好處</strong>：增加體內熱能、清理呼吸道，增強肺活量，幫助冥想時保持覺知與專注。</li>
-                <li><span class="warning">禁忌</span>：嚴重高血壓、心臟病或甲狀腺亢進者應避免過度用力或屏息。</li>
-            </ul>
-        </li>
-        <li>
-            <span class="highlight">5. Bhastrika Pranayama（風箱呼吸法）</span>
-            <ul>
-                <li><strong>好處</strong>：快速增加血液含氧量、促進消化火（Agni）、清除體內毒素與黏液，提供身體能量。</li>
-                <li><span class="warning">禁忌</span>：高血壓、心臟病、癲癇、青光眼、胃潰瘍、懷孕期間及近期做過腹部手術者嚴禁練習。</li>
-            </ul>
-        </li>
-    </ul>
+    <!-- 4. 題庫編輯區 -->
+    <div id="editor-card" class="card">
+        <h2>新增題目</h2>
+        <select id="edit-cat">
+            <option value="瑜伽哲學">瑜伽哲學</option>
+            <option value="體位法">體位法</option>
+            <option value="調息法">調息法</option>
+            <option value="脈輪與能量">脈輪與能量</option>
+        </select>
+        <select id="edit-type" onchange="toggleTypeEdit()">
+            <option value="single">選擇題</option>
+            <option value="short">簡答題</option>
+        </select>
+        <textarea id="edit-q" placeholder="請輸入題目內容..."></textarea>
+        <input type="text" id="edit-img" placeholder="圖片網址 (選填，如：https://.../photo.jpg)">
+        
+        <div id="edit-options-group">
+            <input type="text" class="edit-opt" placeholder="選項 A">
+            <input type="text" class="edit-opt" placeholder="選項 B">
+            <input type="text" class="edit-opt" placeholder="選項 C">
+            <input type="text" class="edit-opt" placeholder="選項 D">
+        </div>
+        
+        <input type="text" id="edit-ans" placeholder="正確答案（選擇題填 A/B/C/D，簡答題填文字答案）">
+        <textarea id="edit-exp" placeholder="重點解析說明..."></textarea>
 
-    <!-- 五、手印與身印 -->
-    <h2>五、手印與身印（Mudra）及梵文拼音</h2>
-    <h3>1. 手印 (Hasta Mudra)[cite: 1]</h3>
-    <p>Jnana Mudra（智慧手印）、Chin Mudra（意識手印）、Yoni Mudra（胎內手印）、Bhairava Mudra（憤怒手印）[cite: 1]</p>
-
-    <h3>2. 頭部身印 (Mana Mudra)[cite: 1]</h3>
-    <p>Shambhavi Mudra（眉心凝視身印）、Nasikagra Drishti Mudra（鼻尖凝視身印）、Khechari Mudra（鎖舌身印）、Sanmukhi Mudra（關七竅身印）[cite: 1]</p>
-
-    <h3>3. 姿勢身印 (Kaya Mudra)[cite: 1]</h3>
-    <p>Vipareeta Karani Mudra（倒轉身印）、Yoga Mudra（瑜伽身印）、Tadagi Mudra（啤酒肚身印）[cite: 1]</p>
-
-    <h3>4. 海底輪身印 (Adhara Mudra)[cite: 1]</h3>
-    <ul>
-        <li><strong>Ashwini Mudra</strong>（馬身印）：收縮肛門括約肌[cite: 1]。</li>
-        <li><strong>Vajroli Mudra / Sahajoli Mudra</strong>（閃電身印 / 自發身印）：收縮尿道往上提[cite: 1]。</li>
-    </ul>
-
-    <!-- 六、鎖印 -->
-    <h2>六、鎖印（Bandha）梵文拼音與名稱</h2>
-    <ul>
-        <li><strong>Jalandhara bandha</strong>（喉輪鎖印 / Throat Lock）[cite: 1]</li>
-        <li><strong>Uddiyana bandha</strong>（臍輪鎖印 / 腹鎖 / Abdominal Lock）[cite: 1]</li>
-        <li><strong>Moola bandha</strong>（海底輪鎖印 / 根鎖 / Root Lock）[cite: 1]</li>
-        <li><strong>Maha bandha</strong>（大鎖印 / The Great Lock）：同時結合三個鎖印[cite: 1]。</li>
-    </ul>
-
-    <!-- 七、梵咒 -->
-    <h2>七、梵咒（Mantra）基礎概念</h2>
-    <ul>
-        <li><strong>定義與含意</strong>：聲音振動，字根取自 <em>mananaat</em>（心靈的束縛）與 <em>trayate</em>（釋放）[cite: 1]。</li>
-        <li><strong>功能</strong>：將心智從不潔（mala）與不滿足（vikshepa）的束縛中解放出來，驅散雜念[cite: 1]。</li>
-        <li><strong>類別</strong>：Universal（普遍性）與 Individual（個人性）[cite: 1]。</li>
-    </ul>
-
-    <!-- 八、七大脈輪與蓮花顏色 -->
-    <h2>八、七大脈輪（Chakra）與蓮花顏色</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>脈輪名稱 (Sanskrit)</th>
-                <th>位置 (Location)</th>
-                <th>代表元素</th>
-                <th>花瓣數</th>
-                <th>蓮花顏色 (Lotus Color)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1. Mooladhara (海底輪)[cite: 1]</td>
-                <td>會陰/脊椎骨底端[cite: 1]</td>
-                <td>土 (Earth)[cite: 1]</td>
-                <td>4 片[cite: 1]</td>
-                <td>暗紅色[cite: 1]</td>
-            </tr>
-            <tr>
-                <td>2. Swadhisthana (生殖輪)[cite: 1]</td>
-                <td>骶骨/生殖器區域[cite: 1]</td>
-                <td>水 (Water)[cite: 1]</td>
-                <td>6 片[cite: 1]</td>
-                <td>鮮紅色[cite: 1]</td>
-            </tr>
-            <tr>
-                <td>3. Manipura (臍輪)[cite: 1]</td>
-                <td>肚臍區域/太陽神經叢[cite: 1]</td>
-                <td>火 (Fire)[cite: 1]</td>
-                <td>10 片[cite: 1]</td>
-                <td>黃色[cite: 1]</td>
-            </tr>
-            <tr>
-                <td>4. Anahata (心輪)[cite: 1]</td>
-                <td>胸部中央/心臟區域[cite: 1]</td>
-                <td>風/氣 (Air)[cite: 1]</td>
-                <td>12 片[cite: 1]</td>
-                <td>藍色[cite: 1]</td>
-            </tr>
-            <tr>
-                <td>5. Vishuddhi (喉輪)[cite: 1]</td>
-                <td>喉嚨區域[cite: 1]</td>
-                <td>空 (Ether)[cite: 1]</td>
-                <td>16 片[cite: 1]</td>
-                <td>紫色[cite: 1]</td>
-            </tr>
-            <tr>
-                <td>6. Ajna (眉心輪)[cite: 1]</td>
-                <td>兩眉之間[cite: 1]</td>
-                <td>心智/超越元素[cite: 1]</td>
-                <td>2 片[cite: 1]</td>
-                <td>銀色[cite: 1]</td>
-            </tr>
-            <tr>
-                <td>7. Sahasrara (頂輪)[cite: 1]</td>
-                <td>頭頂[cite: 1]</td>
-                <td>宇宙意識[cite: 1]</td>
-                <td>千瓣 (1000)[cite: 1]</td>
-                <td>白色（濕婆在其中）[cite: 1]</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- 九、脈叢 / 梵結定義與分類 -->
-    <h2>九、脈叢 / 梵結（Granthi）定義與分類</h2>
-    <p><strong>定義</strong>：Granthi 原意為「結」或「阻礙」，指在中脈（Sushumna Nadi）上影響生命能量（Prana）上升的三個主要精神與能量結節[cite: 1]。能量穿透這些結節才能順利升至頂輪達到覺悟。</p>
-    <ul>
-        <li><span class="highlight">Brahma Granthi（梵天結）</span>：由<strong>海底輪與生殖輪</strong>組成。代表對物質世界、肉體生存與本能慾望的執著。</li>
-        <li><span class="highlight">Vishnu Granthi（毗濕奴結）</span>：由<strong>臍輪與心輪</strong>組成。代表對情感、關係、權力與名利的執著。</li>
-        <li><span class="highlight">Rudra Granthi / Shiva Granthi（濕婆結）</span>：由<strong>喉輪與眉心輪</strong>組成。代表對個人智力、靈性能力及自我超能力的執著。</li>
-    </ul>
-
-    <!-- 十、精微體、生命氣與經脈 -->
-    <h2>十、精微體（Kosha）、生命氣（Prana Vayus）與經脈（Nadis）</h2>
-    <h3>1. 精微體五層（Kosha）[cite: 1]</h3>
-    <p>Annamaya Kosha（食物鞘） | Pranamaya Kosha（能量鞘） | Manomaya Kosha（心智鞘） | Vijnanamaya Kosha（智慧鞘） | Anandamaya Kosha（喜悅鞘）[cite: 1]</p>
-
-    <h3>2. 五大生命氣（Prana Vayus）[cite: 1]</h3>
-    <p>Prana Vayu（胸部/吸氣） | Apana Vayu（下腹/排泄） | Samana Vayu（肚臍/消化） | Udana Vayu（喉頭/向上） | Vyana Vayu（全身/循環）[cite: 1]</p>
-
-    <h3>3. 三大主脈（Nadis）[cite: 1]</h3>
-    <p>Sushumna Nadi（中脈） | Ida Nadi（左脈/陰/月亮） | Pingala Nadi（右脈/陽/太陽）[cite: 1]</p>
-
-    <!-- 十一、舒眠瑜伽 -->
-    <h2>十一、舒眠瑜伽（Yoga Nidra）步驟與結構</h2>
-    <ol>
-        <li>Preparation（準備與放鬆）[cite: 1]</li>
-        <li>Sankalpa（意念/誓言）[cite: 1]</li>
-        <li>Rotation of Consciousness（意識輪轉/身體掃描）[cite: 1]</li>
-        <li>Breath Awareness（呼吸覺知）[cite: 1]</li>
-        <li>Opposite Feelings/Sensations（體驗對立感受）[cite: 1]</li>
-        <li>Visualization（視覺化/意象引導）[cite: 1]</li>
-        <li>Re-affirmation of Sankalpa（再次重申誓言）[cite: 1]</li>
-        <li>Externalization / Return（喚醒與帶回外在）[cite: 1]</li>
-    </ol>
-
-    <!-- 十二、冥想 -->
-    <h2>十二、冥想（Meditation / Dhyana）概念與步驟</h2>
-    <h3>1. 冥想的定義與分類</h3>
-    <ul>
-        <li><strong>凝神（Dharana）與冥想（Dhyana）的差異</strong>：凝神時心智仍會不斷干擾，修練者需持續將注意力拉回目標；冥想則是克服外在干擾，心智完全且持續全神貫注於目標。</li>
-        <li><strong>冥想兩大類型</strong>：
-            <ul>
-                <li><span class="highlight">主動冥想（Active Meditation）</span>：修練者自發每天練習冥想一次（如日常工作時的主動專注）。</li>
-                <li><span class="highlight">被動冥想（Passive Meditation）</span>：坐在特定姿勢便開始冥想練習（如清晨或睡前洗澡後進行）。</li>
-            </ul>
-        </li>
-    </ul>
-
-    <h3>2. 冥想的 5 大步驟</h3>
-    <ol>
-        <li><strong>Preparation</strong>（準備）</li>
-        <li><strong>Body Stillness</strong>（身體靜止）</li>
-        <li><strong>Sense Withdrawal</strong>（感官撤離）</li>
-        <li><strong>Dharana</strong>（凝神）</li>
-        <li><strong>Meditation</strong>（冥想）</li>
-    </ol>
-
+        <button class="btn" onclick="saveQuestion()">💾 儲存至題庫</button>
+        <button class="btn btn-secondary" onclick="showHome()">取消返回</button>
+    </div>
 </div>
 
+<script>
+// 初始預設題庫 (包含哲學、調息法、脈輪、體位法圖片題等範例)
+let defaultQuestionBank = [
+    {
+        id: 1,
+        category: "瑜伽哲學",
+        type: "single",
+        question: "數論哲學（Sankhya）中，哪一個概念代表『永恆不變、純粹意識』？",
+        img: "",
+        options: ["Prakriti 原質", "Purusha 靈/神我", "Mahat 智力", "Ahankara 自我"],
+        answer: "B",
+        explanation: "Purusha 代表永恆不變的純粹意識；Prakriti 則為物質世界的根本原質。"
+    },
+    {
+        id: 2,
+        category: "脈輪與能量",
+        type: "single",
+        question: "關於脈輪蓮花顏色的對應，『心輪（Anahata）』代表的蓮花顏色為何？",
+        img: "",
+        options: ["綠色", "黃色", "藍色", "紫色"],
+        answer: "C",
+        explanation: "心輪代表的蓮花顏色為藍色（元素為風/氣）；代表顏色雖為綠色，但筆記重點強調蓮花顏色為藍色。"
+    },
+    {
+        id: 3,
+        category: "調息法",
+        type: "single",
+        question: "下列哪一種調息法有助於降溫冷卻體溫，但『低血壓及哮喘患者』不宜練習？",
+        img: "",
+        options: ["Bhastrika 風箱呼吸法", "Seetkari 嘶聲呼吸法", "Bhramari 蜜蜂呼吸法", "Ujjai 勝利呼吸法"],
+        answer: "B",
+        explanation: "Seetkari（嘶聲呼吸法）能冷卻身體與降低血壓，因此低血壓及呼吸道過敏患者不宜練習。"
+    },
+    {
+        id: 4,
+        category: "瑜伽哲學",
+        type: "short",
+        question: "請寫出三性（Gunas）中，由惰性（Tamas）所分化出的『五大元素』有哪些？",
+        img: "",
+        options: [],
+        answer: "空、風、火、水、土",
+        explanation: "惰性（Tamas）分化出五感受與五大元素（空、風、火、水、土）。"
+    },
+    {
+        id: 5,
+        category: "體位法",
+        type: "single",
+        question: "圖中這項身印（Mudra）動作，收縮肛門括約肌稱為？",
+        img: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=500", // 預設示範圖
+        options: ["Ashwini Mudra (馬身印)", "Vajroli Mudra (閃電身印)", "Khechari Mudra (鎖舌身印)", "Yoni Mudra (胎內手印)"],
+        answer: "A",
+        explanation: "Ashwini Mudra 為馬身印，主要動作為收縮肛門括約肌。"
+    }
+];
+
+// 本地存儲或使用預設
+let questionBank = JSON.parse(localStorage.getItem('yoga_quiz_db')) || defaultQuestionBank;
+
+let currentQuiz = [];
+let currentIndex = 0;
+let userAnswers = [];
+
+function showCard(id) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+function showHome() { showCard('home-card'); }
+function showEditor() { showCard('editor-card'); }
+
+function startQuiz() {
+    // 隨機抽 5 題（或全部題目）
+    currentQuiz = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, 5);
+    currentIndex = 0;
+    userAnswers = [];
+    showCard('quiz-card');
+    renderQuestion();
+}
+
+function renderQuestion() {
+    let q = currentQuiz[currentIndex];
+    document.getElementById('progress').style.width = `${((currentIndex + 1) / currentQuiz.length) * 100}%`;
+    document.getElementById('category-badge').innerText = `[${q.category}] 第 ${currentIndex + 1} / ${currentQuiz.length} 題`;
+    document.getElementById('question-text').innerText = q.question;
+    
+    let imgEl = document.getElementById('question-img');
+    if (q.img) {
+        imgEl.src = q.img;
+        imgEl.style.display = 'block';
+    } else {
+        imgEl.style.display = 'none';
+    }
+
+    let optsContainer = document.getElementById('options-container');
+    let inputEl = document.getElementById('short-answer-input');
+    optsContainer.innerHTML = '';
+
+    if (q.type === 'single') {
+        inputEl.style.display = 'none';
+        optsContainer.style.display = 'block';
+        q.options.forEach((opt, i) => {
+            let letter = String.fromCharCode(65 + i);
+            let btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = `${letter}. ${opt}`;
+            btn.onclick = () => {
+                document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                userAnswers[currentIndex] = letter;
+            };
+            optsContainer.appendChild(btn);
+        });
+    } else {
+        optsContainer.style.display = 'none';
+        inputEl.style.display = 'block';
+        inputEl.value = '';
+        inputEl.oninput = (e) => { userAnswers[currentIndex] = e.target.value; };
+    }
+}
+
+function nextQuestion() {
+    if (!userAnswers[currentIndex]) {
+        alert("請先回答或填寫選項喔！");
+        return;
+    }
+    currentIndex++;
+    if (currentIndex < currentQuiz.length) {
+        renderQuestion();
+    } else {
+        calculateResult();
+    }
+}
+
+function calculateResult() {
+    let score = 0;
+    let categoryStats = {};
+
+    currentQuiz.forEach((q, i) => {
+        if (!categoryStats[q.category]) categoryStats[q.category] = { correct: 0, total: 0 };
+        categoryStats[q.category].total++;
+
+        let isCorrect = false;
+        if (q.type === 'single') {
+            isCorrect = userAnswers[i] === q.answer;
+        } else {
+            // 簡答題關鍵字包含匹配
+            isCorrect = userAnswers[i] && q.answer.split('、').every(k => userAnswers[i].includes(k.trim()));
+        }
+
+        if (isCorrect) {
+            score += (100 / currentQuiz.length);
+            categoryStats[q.category].correct++;
+        }
+    });
+
+    // 顯示分數
+    document.getElementById('score-text').innerText = `${Math.round(score)} 分`;
+
+    // 強弱項標籤
+    let tagsContainer = document.getElementById('analysis-tags');
+    tagsContainer.innerHTML = '';
+    for (let cat in categoryStats) {
+        let rate = categoryStats[cat].correct / categoryStats[cat].total;
+        let tag = document.createElement('span');
+        tag.className = `tag ${rate >= 0.6 ? 'tag-strong' : 'tag-weak'}`;
+        tag.innerText = `${cat} (${Math.round(rate * 100)}%)`;
+        tagsContainer.appendChild(tag);
+    }
+
+    // 解析總覽
+    let reviewContainer = document.getElementById('review-container');
+    reviewContainer.innerHTML = '';
+    currentQuiz.forEach((q, i) => {
+        let div = document.createElement('div');
+        div.className = 'analysis-item';
+        div.innerHTML = `
+            <strong>Q${i+1}. [${q.category}] ${q.question}</strong><br>
+            你的回答：<span style="color:${userAnswers[i] === q.answer ? 'green':'red'}">${userAnswers[i] || '未答'}</span> | 
+            正確答案：<b>${q.answer}</b><br>
+            <small style="color:#555;">💡 解析：${q.explanation}</small>
+        `;
+        reviewContainer.appendChild(div);
+    });
+
+    showCard('result-card');
+}
+
+function toggleTypeEdit() {
+    let type = document.getElementById('edit-type').value;
+    document.getElementById('edit-options-group').style.display = type === 'single' ? 'block' : 'none';
+}
+
+function saveQuestion() {
+    let cat = document.getElementById('edit-cat').value;
+    let type = document.getElementById('edit-type').value;
+    let qText = document.getElementById('edit-q').value;
+    let img = document.getElementById('edit-img').value;
+    let ans = document.getElementById('edit-ans').value;
+    let exp = document.getElementById('edit-exp').value;
+
+    if (!qText || !ans) { alert("請填寫題目與答案！"); return; }
+
+    let opts = [];
+    if (type === 'single') {
+        document.querySelectorAll('.edit-opt').forEach(input => {
+            if (input.value) opts.push(input.value);
+        });
+    }
+
+    let newQ = {
+        id: Date.now(),
+        category: cat,
+        type: type,
+        question: qText,
+        img: img,
+        options: opts,
+        answer: ans.toUpperCase(),
+        explanation: exp
+    };
+
+    questionBank.push(newQ);
+    localStorage.setItem('yoga_quiz_db', JSON.stringify(questionBank));
+    alert("題目新增成功！");
+    showHome();
+}
+</script>
 </body>
 </html>
-
