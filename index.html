@@ -251,6 +251,7 @@ const MC_BANK = [
 {cat:'sankhya', q:'變性（Rajas）的特性為何？', opts:['產生具體的感官器官','不產生實體，提供能量與驅動力','是純粹意識','是物質根本'], a:1, ex:'變性（Rajas）本身不產生實體，而是提供悅性與惰性演化所需的能量與驅動力。'},
 {cat:'sankhya', q:'人生的五大煩惱（Kleshas）有無知、有我、執著、排斥與？', opts:['死懼','貪婪','憤怒','幻想'], a:0, ex:'五煩惱（Kleshas）為：無知、有我、執著、死懼、排斥。'},
 {cat:'sankhya', q:'六大正統哲學派別中，著重實踐並以《瑜伽經》為核心的是？', opts:['Nyaya（正理論）','Yoga（瑜伽）','Vedanta（吠壇多）','Mimansa（彌曼差）'], a:1, ex:'Yoga 派由 Patanjali 創立，著重實踐端與《瑜伽經》。'},
+{cat:'sankhya', q:'「Darshan」的意思是什麼？', opts:['意識傾聽','熱愛','帶著覺知去看見','宇宙意識能量'], a:2, ex:'「Darshan」（中文常譯為「達顯」）源自梵文，字面意思是「看見」或「注視」，帶著覺知去看見，也常用來代指印度哲學。'},
 {cat:'sankhya', q:'以下何者屬於「非正統（Hetrodox）」印度哲學派別，即不依據《吠陀經》？', opts:['數論（Sankhya）','瑜伽（Yoga）','佛教(Buddha Dharma)','吠壇多（Vedanta）'], a:2, ex:'非正統派別不依《吠陀經》為本，包含佛教、耆那教與查瓦克（Charmwaka）。'},
 
 // ---------------- 瑜伽經 sutra ----------------
@@ -276,7 +277,8 @@ const MC_BANK = [
 {cat:'hatha', q:'《哈達瑜伽經》的作者是哪位聖哲？', opts:['Patanjali','Kapil','Swatmarama（斯瓦特拉瑪）','Vyasa'], a:2, ex:'《哈達瑜伽經》由聖哲 Swatmarama 所著。'},
 {cat:'hatha', q:'「Ha」在哈達瑜伽中代表？', opts:['月／陰／左鼻孔','日／陽／右鼻孔／太陽脈 Pingala','中脈 Sushumna','心智之流'], a:1, ex:'Ha 代表日、陽、右鼻孔與太陽脈（Pingala Nadi）。'},
 {cat:'hatha', q:'「Tha」在哈達瑜伽中代表？', opts:['日／陽／右鼻孔','月／陰／左鼻孔／月亮脈 Ida','中脈 Sushumna','火之元素'], a:1, ex:'Tha 代表月、陰、左鼻孔與月亮脈（Ida Nadi）。'},
-{cat:'hatha', q:'哈達瑜伽與帕坦伽利瑜伽經最大的差異在於？', opts:['哈達瑜伽透過控制身體與呼吸來進一步控制心智','哈達瑜伽只重視冥想不重視體位法','瑜伽經著重外在戒律而非心智','兩者完全相同並無差異'], a:0, ex:'瑜伽經著重由高至低直接控制心智；哈達瑜伽則透過控制身體與呼吸間接控制心智。'},
+{cat:'hatha', q:'根據《哈達瑜伽經》中所述，哈達瑜伽的目的是什麼？', opts:['獲得知識','獲得永生','達到勝王瑜伽','無特定目的'], a:2, ex:'根據《哈達瑜伽經》所述，哈達瑜伽的最終目的是作為通往「勝王瑜伽」（Raja Yoga）的階梯與唯一途徑。它透過身體的淨化、體位法與呼吸控制，創造身心平衡，進而喚醒拙火（Kundalini），最終達到靈性解脫的最高境界。'},
+{cat:'hatha', q:'哈達瑜伽與帕坦伽利瑜伽經最大的差異在於？', opts:['哈達瑜伽透過控制身體與呼吸來進一步控制心智','哈達瑜伽只重視冥想不重視體位法','瑜伽經著重外在戒律而非心智','兩者完全相同並無差異'], a:0, ex:'瑜伽經著重由高至低直接控制心智；哈達瑜伽則透過身體淨化、體位法與呼吸控制心智。'},
 {cat:'hatha', q:'以下何者「不屬於」六大淨化法（Shatkarma）？', opts:['Neti（洗鼻法）','Trataka（凝視法）','Bhastrika（風箱呼吸法）','Nauli（腹部按摩法）'], a:2, ex:'Bhastrika 屬於調息法（Pranayama），並非六大淨化法之一。'},
 {cat:'hatha', q:'「Neti」淨化法指的是？', opts:['洗鼻法','灌腸法','腹部按摩法','凝視法'], a:0, ex:'Neti 是清潔鼻腔通道的洗鼻法。'},
 {cat:'hatha', q:'「Trataka」淨化法指的是？', opts:['前額葉淨化法','凝視法','灌腸法','內部淨化法'], a:1, ex:'Trataka 是專注凝視特定目標（如燭光）以淨化心智的凝視法。'},
@@ -303,15 +305,17 @@ const MC_BANK = [
 {cat:'mudra', q:'Sanmukhi Mudra 是指？', opts:['鎖舌身印','關七竅身印','瑜伽身印','啤酒肚身印'], a:1, ex:'Sanmukhi Mudra 是以雙手輕閉七竅（眼耳鼻口）的身印。'},
 {cat:'mudra', q:'Ashwini Mudra（馬身印）的動作為？', opts:['收縮尿道往上提','收縮肛門括約肌','雙掌合十','拇指觸食指'], a:1, ex:'Ashwini Mudra 屬海底輪身印，動作為收縮肛門括約肌。'},
 {cat:'mudra', q:'Vajroli／Sahajoli Mudra （閃電身印/自發身印）的動作為？', opts:['收縮肛門括約肌','收縮尿道往上提','凝視鼻尖','鎖舌向上'], a:1, ex:'Vajroli／Sahajoli Mudra 閃電身印/自發身印屬海底輪身印，動作為收縮尿道往上提。'},
+{cat:'mudra', q:'什麼情況下不要練習 Vajroli／Sahajoli Mudra （閃電身印/自發身印）？', opts:['心臟病、高血壓患者','尿道炎','憂鬱症','2~3個月內有進行眼部手術'], a:1, ex:'Vajroli／Sahajoli Mudra （閃電身印/自發身印）是透過收縮生殖泌尿系統與骨盆底肌肉來調節能量。若泌尿道感染發炎，切勿勉強練習。'},
 {cat:'mudra', q:'Jalandhara Bandha 指的是哪一種鎖印？', opts:['喉輪鎖印','臍輪鎖印／腹鎖','海底輪鎖印／根鎖','大鎖印'], a:0, ex:'Jalandhara Bandha 為喉輪鎖印（Throat Lock）。'},
 {cat:'mudra', q:'Uddiyana Bandha 指的是哪一種鎖印？', opts:['喉輪鎖印','臍輪鎖印／腹鎖','海底輪鎖印／根鎖','大鎖印'], a:1, ex:'Uddiyana Bandha 為臍輪鎖印，即腹鎖（Abdominal Lock）。'},
 {cat:'mudra', q:'Moola Bandha 指的是哪一種鎖印？', opts:['喉輪鎖印','臍輪鎖印','海底輪鎖印／根鎖','大鎖印'], a:2, ex:'Moola Bandha 為海底輪鎖印，即根鎖（Root Lock）。'},
 {cat:'mudra', q:'Maha Bandha（大鎖印）的定義為？', opts:['僅指喉輪鎖印','僅指腹鎖','同時結合喉輪、臍輪與海底輪三個鎖印','是一種手印而非鎖印'], a:2, ex:'Maha Bandha（大鎖印）同時結合 Jalandhara、Uddiyana 與 Moola 三個鎖印。'},
+{cat:'mudra', q:'練習大鎖印時的順序為何？', opts:['Jalandhara→Bandha Uddiyana→Bandha Moola Bandha','Bandha Uddiyana→JalandharaBandha→Moola Bandha','Moola Bandha→Bandha Uddiyana→JalandharaBandha','Jalandhara→Bandha Moola Bandha→Bandha Uddiyana'], a:0, ex:'進入大鎖印（Maha Bandha）時需完全呼氣並配合外止息後進行三個鎖印(Bandha)，順序依序為喉鎖（Jalandhara Bandha）、臍鎖（Uddiyana Bandha）、根鎖（Mula Bandha）。'}
 
 // ---------------- 脈輪精微體 chakra ----------------
 {cat:'chakra', q:'海底輪（Mooladhara）對應的元素為？', opts:['水','火','土','空'], a:2, ex:'Mooladhara（海底輪）位於會陰／脊椎骨底端，對應土元素。'},
-{cat:'chakra', q:'生殖輪（Swadhisthana）對應的元素為？', opts:['土','水','火','風'], a:1, ex:'Swadhisthana（生殖輪）位於骶骨區域，對應水元素。'},
-{cat:'chakra', q:'臍輪（Manipura）對應的元素為？', opts:['水','火','風','空'], a:1, ex:'Manipura（臍輪）位於太陽神經叢，對應火元素。'},
+{cat:'chakra', q:'生殖輪（Swadhisthana）對應的元素為？', opts:['土','水','火','風'], a:1, ex:'Swadhisthana（生殖輪）位於恥骨區域，對應水元素。'},
+{cat:'chakra', q:'臍輪（Manipura）對應的元素為？', opts:['水','火','風','空'], a:1, ex:'Manipura（臍輪）位於肚臍後方脊椎上，對應火元素。'},
 {cat:'chakra', q:'心輪（Anahata）對應的元素為？', opts:['火','風／氣','空','土'], a:1, ex:'Anahata（心輪）位於胸部中央，對應風／氣元素。'},
 {cat:'chakra', q:'喉輪（Vishuddhi）對應的元素為？', opts:['風','空','心智','水'], a:1, ex:'Vishuddhi（喉輪）位於喉嚨區域，對應空（Ether）元素。'},
 {cat:'chakra', q:'眉心輪（Ajna）的花瓣數為？', opts:['2 片','4 片','10 片','千瓣'], a:0, ex:'Ajna（眉心輪）僅有 2 片花瓣，對應心智／超越元素的層次。'},
@@ -319,14 +323,13 @@ const MC_BANK = [
 {cat:'chakra', q:'海底輪（Mooladhara）的花瓣數為？', opts:['4 片','6 片','10 片','12 片'], a:0, ex:'Mooladhara（海底輪）有 4 片花瓣。'},
 {cat:'chakra', q:'臍輪（Manipura）的蓮花顏色為？', opts:['暗紅色','鮮紅色','黃色','藍色'], a:2, ex:'Manipura（臍輪）對應黃色蓮花，象徵火元素的能量。'},
 {cat:'chakra', q:'心輪（Anahata）的蓮花顏色為？', opts:['黃色','藍色','紫色','銀色'], a:1, ex:'Anahata（心輪）對應藍色蓮花。'},
-{cat:'chakra', q:'喉輪（Vishuddhi）的蓮花顏色為？', opts:['藍色','紫色','白色','暗紅色'], a:1, ex:'Vishuddhi（喉輪）對應紫色蓮花。'},
-{cat:'chakra', q:'頂輪（Sahasrara）的蓮花顏色為？', opts:['白色（濕婆在其中）','黃色','銀色','暗紅色'], a:0, ex:'Sahasrara（頂輪）呈白色，象徵濕婆（純粹意識）在其中安住。'},
+{cat:'chakra', q:'喉輪（Vishuddhi）的蓮花顏色為？', opts:['綠色','紫色','白色','暗紅色'], a:1, ex:'Vishuddhi（喉輪）對應紫色蓮花。'},
 {cat:'chakra', q:'「Granthi」一詞的原意為？', opts:['結／阻礙','光／能量','蓮花／花瓣','呼吸／氣息'], a:0, ex:'Granthi 原意為「結」或「阻礙」，指中脈上妨礙生命能量上升的能量結節。'},
 {cat:'chakra', q:'Brahma Granthi（梵天結）由哪兩個脈輪組成？', opts:['臍輪與心輪','喉輪與眉心輪','海底輪與生殖輪','心輪與喉輪'], a:2, ex:'Brahma Granthi 由海底輪與生殖輪組成，代表對物質世界與本能慾望的執著。'},
 {cat:'chakra', q:'Vishnu Granthi（毗濕奴結）由哪兩個脈輪組成？', opts:['海底輪與生殖輪','臍輪與心輪','喉輪與眉心輪','心輪與頂輪'], a:1, ex:'Vishnu Granthi 由臍輪與心輪組成，代表對情感、關係與名利的執著。'},
 {cat:'chakra', q:'Rudra／Shiva Granthi（濕婆結）由哪兩個脈輪組成？', opts:['海底輪與生殖輪','臍輪與心輪','喉輪與眉心輪','眉心輪與頂輪'], a:2, ex:'Rudra Granthi 由喉輪與眉心輪組成，代表對個人智力與靈性能力的執著。'},
 {cat:'chakra', q:'精微體五層（Kosha）中，最內層、與肉身相關的是？', opts:['Pranamaya Kosha（能量鞘）','Annamaya Kosha（食物鞘）','Manomaya Kosha（心智鞘）','Anandamaya Kosha（喜悅鞘）'], a:1, ex:'Annamaya Kosha（食物鞘）是最內層，對應肉體層面。'},
-{cat:'chakra', q:'「Anandamaya Kosha」意指？', opts:['食物鞘','能量鞘','智慧鞘','喜悅鞘'], a:3, ex:'Anandamaya Kosha 為喜悅鞘，是精微體五層中最外層。'},
+{cat:'chakra', q:'五個生命層中的「Anandamaya Kosha」意指？', opts:['食物鞘','能量鞘','智慧鞘','喜悅鞘'], a:3, ex:'Anandamaya Kosha 為喜悅鞘/神身，是精微體五層中最外層。'},
 {cat:'chakra', q:'五大生命氣（Prana Vayus）中，主管消化功能、位於上腹部的是？', opts:['Prana Vayu呼吸氣','Samana Vayu消化氣','Udana Vayu外接氣','Vyana Vayu調和氣'], a:1, ex:'Samana Vayu 主管肚臍區的消化功能。'},
 {cat:'chakra', q:'三大主脈中，位於中央的「中脈」稱為？', opts:['Ida Nadi','Pingala Nadi','Sushumna Nadi','Vishuddhi Nadi'], a:2, ex:'Sushumna Nadi（中脈）位於脊柱中央，是能量上升的主要通道。'},
 {cat:'chakra', q:'Ida Nadi 對應的是？', opts:['右脈／陽／太陽','左脈／陰／月亮','中脈','喉輪能量'], a:1, ex:'Ida Nadi 為左脈，對應陰性能量與月亮。'},
@@ -339,10 +342,8 @@ const MC_BANK = [
 {cat:'nidra', q:'舒眠瑜伽中，身體掃描的步驟稱為？', opts:['Externalization（具體化外在感知）','Rotation of Consciousness（意識輪轉）','Sense Withdraw（感官撤離）','Reslove（決意）'], a:1, ex:'Rotation of Consciousness（意識輪轉）即引導意識依序掃描全身各部位。'},
 {cat:'nidra', q:'凝神（Dharana）的特徵為？', opts:['心智已完全不受干擾','心智仍會不斷干擾，需持續將注意力拉回目標','僅存在目標物並失去自我意識','屬於八支瑜伽的最後一支'], a:1, ex:'Dharana 階段心智仍會受到干擾，修練者需不斷把注意力拉回專注的目標。'},
 {cat:'nidra', q:'以下何者「不是」冥想的兩大類型之一？', opts:['主動冥想（Active Meditation）','被動冥想（Passive Meditation）','強制冥想','以上皆是冥想類型'], a:2, ex:'冥想僅分為主動冥想與被動冥想兩大類型，並無「強制冥想」的分類。'},
-{cat:'nidra', q:'以下何者最符合「被動冥想」的範例？', opts:['日常工作中主動保持專注','清晨或睡前洗澡後坐下開始冥想練習','邊走路邊冥想','無固定姿勢隨時進行'], a:1, ex:'被動冥想是坐在特定姿勢下開始的冥想練習，如清晨或睡前洗澡後進行。'},
 {cat:'nidra', q:'冥想五大步驟中，「感官撤離」對應哪一個梵文概念？', opts:['Dharana','Pratyahara','Dhyana','Samadhi'], a:1, ex:'冥想第三步驟為 Sense Withdrawal（感官撤離），對應八支瑜伽中的 Pratyahara。'},
 {cat:'nidra', q:'冥想五大步驟的最後一步為？', opts:['Body Stillness','Dharana','Meditation（Dhyana）','Preparation'], a:2, ex:'冥想五大步驟依序為：準備、身體靜止、感官撤離、凝神、最後進入冥想（Dhyana）。'},
-
 ];
 
 /* 體位法簡答題庫 —— 已涵蓋講義中全部 50 個體位法 */
