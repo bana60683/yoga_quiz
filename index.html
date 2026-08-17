@@ -1,408 +1,696 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>瑜伽師資培訓 模擬考試</title>
-    <style>
-        :root {
-            --primary: #4a6fa5;
-            --secondary: #166088;
-            --success: #2a9d8f;
-            --danger: #e76f51;
-            --bg: #f4f6f8;
-            --card: #ffffff;
-            --text: #2b2d42;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>瑜伽哲學模擬考 · RYT200</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF8F0;
+    --bg-alt:#FFEDDC;
+    --card:#FFFFFF;
+    --primary:#E65100;
+    --primary-light:#FF7043;
+    --gold:#FFB300;
+    --ink:#3E2313;
+    --ink-soft:#8A6A54;
+    --success:#2E7D32;
+    --success-bg:#E9F5EA;
+    --error:#C0392B;
+    --error-bg:#FCEAE7;
+    --line: rgba(230,81,0,0.14);
+    --radius: 22px;
+    --shadow: 0 14px 34px -18px rgba(160,70,10,0.45);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, #FFE3C4 0%, transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    padding: 20px 14px 60px;
+  }
+  .wrap{max-width:640px; margin:0 auto;}
+  .sanskrit{font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--primary);}
+  h1,h2,h3{font-family:'Noto Serif TC', serif; margin:0;}
+  a{color:inherit;}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 12px;
-            display: flex;
-            justify-content: center;
-        }
+  /* ---------- Header ---------- */
+  .app-header{ text-align:center; padding: 14px 0 22px; }
+  .app-header .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12.5px; letter-spacing:.14em; color:var(--primary);
+    background:#FFF; border:1px solid var(--line); padding:5px 14px;
+    border-radius:99px; margin-bottom:14px; font-weight:700;
+  }
+  .app-header .sun-mark{
+    width:16px;height:16px;border-radius:50%;
+    background:conic-gradient(from 0deg, var(--gold), var(--primary), var(--gold));
+  }
+  .app-header h1{font-size:26px; font-weight:900; color:var(--ink); line-height:1.4;}
+  .app-header p{color:var(--ink-soft); font-size:14px; margin-top:8px;}
 
-        .app-container {
-            width: 100%;
-            max-width: 600px;
-            background: var(--card);
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            padding: 20px;
-            box-sizing: border-box;
-        }
+  /* ---------- Cards ---------- */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+    padding:26px 22px;
+    margin-bottom:16px;
+  }
 
-        header {
-            text-align: center;
-            border-bottom: 2px solid var(--bg);
-            padding-bottom: 12px;
-            margin-bottom: 20px;
-        }
+  /* ---------- Intro screen ---------- */
+  .intro-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:20px 0;}
+  .intro-stat{background:var(--bg-alt); border-radius:16px; padding:14px 8px; text-align:center;}
+  .intro-stat b{display:block; font-size:22px; color:var(--primary); font-family:'Noto Serif TC',serif;}
+  .intro-stat span{font-size:12px; color:var(--ink-soft);}
+  .cat-chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+  .chip{background:var(--bg-alt); color:var(--primary); font-size:12.5px; font-weight:700; padding:6px 12px; border-radius:99px;}
 
-        h1 { font-size: 1.4rem; color: var(--secondary); margin: 0; }
-        .subtitle { font-size: 0.85rem; color: #6c757d; margin-top: 4px; }
+  .btn{
+    display:block; width:100%; border:none; cursor:pointer;
+    background:linear-gradient(135deg, var(--primary-light), var(--primary));
+    color:#fff; font-weight:700; font-size:16px;
+    padding:16px 20px; border-radius:16px;
+    font-family:'Noto Sans TC',sans-serif;
+    box-shadow:0 12px 24px -10px rgba(230,81,0,0.55);
+    transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn:active{transform:scale(0.97); box-shadow:0 6px 14px -8px rgba(230,81,0,0.5);}
+  .btn:disabled{ opacity:.45; box-shadow:none; cursor:not-allowed; }
+  .btn.secondary{
+    background:#fff; color:var(--primary); border:2px solid var(--primary-light);
+    box-shadow:none;
+  }
+  .btn.small{padding:11px 16px; font-size:14px; width:auto; display:inline-block;}
 
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background-color: var(--primary);
-            color: white;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.2s;
-        }
+  /* ---------- Mala progress ---------- */
+  .mala{ display:flex; justify-content:center; gap:5px; flex-wrap:wrap; padding:4px 0 4px; }
+  .bead{
+    width:13px; height:13px; border-radius:50%;
+    background:#F2DCC8; border:1.5px solid #EAC79D;
+    transition: all .25s ease;
+  }
+  .bead.done{ background:linear-gradient(135deg,var(--gold),var(--primary)); border-color:var(--primary); }
+  .bead.current{ background:#fff; border-color:var(--primary); box-shadow:0 0 0 4px rgba(230,81,0,0.15); transform:scale(1.2); }
+  .progress-label{ text-align:center; font-size:12.5px; color:var(--ink-soft); margin-bottom:14px; letter-spacing:.05em;}
 
-        .btn:active { transform: scale(0.98); }
-        .btn-secondary { background-color: #6c757d; }
-        .btn-outline { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
+  /* ---------- Quiz question ---------- */
+  .q-meta{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+  .q-cat{ font-size:11.5px; font-weight:700; color:var(--primary); background:var(--bg-alt); padding:4px 10px; border-radius:99px;}
+  .q-num{ font-size:12px; color:var(--ink-soft); font-weight:700;}
+  .q-text{ font-size:18px; line-height:1.65; font-weight:700; margin: 6px 0 20px; font-family:'Noto Serif TC',serif;}
 
-        .card { display: none; }
-        .card.active { display: block; }
+  .options{ display:flex; flex-direction:column; gap:10px; }
+  .option{
+    text-align:left; background:var(--bg); border:2px solid var(--line);
+    border-radius:16px; padding:14px 16px; font-size:15px; cursor:pointer;
+    display:flex; align-items:center; gap:12px; transition: all .15s ease;
+    font-family:'Noto Sans TC',sans-serif; color:var(--ink);
+  }
+  .option:active{ transform:scale(0.985); }
+  .option .dot{ width:22px;height:22px;border-radius:50%; border:2px solid var(--primary-light); flex:0 0 auto; }
+  .option.selected{ background:#FFF3E9; border-color:var(--primary); }
+  .option.selected .dot{ background:var(--primary); border-color:var(--primary); }
 
-        .question-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; }
-        .question-img { width: 100%; max-height: 220px; object-fit: contain; border-radius: 8px; margin-bottom: 12px; background: #eee; }
+  .fill-wrap{ margin-bottom:6px; }
+  .fill-wrap label{ font-size:13px; color:var(--ink-soft); display:block; margin-bottom:8px;}
+  .fill-input{
+    width:100%; padding:16px; font-size:17px; border-radius:14px;
+    border:2px solid var(--line); background:var(--bg);
+    font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--ink);
+  }
+  .fill-input:focus{ outline:none; border-color:var(--primary); background:#fff;}
+  .fill-hint{ font-size:12px; color:var(--ink-soft); margin-top:8px;}
 
-        .option-btn {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 8px;
-            text-align: left;
-            width: 100%;
-            font-size: 0.95rem;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
+  .nav-row{ display:flex; gap:10px; margin-top:22px; }
+  .nav-row .btn{ flex:1; }
 
-        .option-btn.selected { border-color: var(--primary); background: #eef4fc; }
+  /* ---------- Results ---------- */
+  .score-hero{ text-align:center; padding: 10px 0 6px;}
+  .score-ring{
+    width:150px; height:150px; border-radius:50%; margin:0 auto 14px;
+    display:flex; align-items:center; justify-content:center;
+    background: conic-gradient(var(--primary) calc(var(--pct,0)*1%), #F2DCC8 0);
+    position:relative;
+  }
+  .score-ring::before{
+    content:''; position:absolute; width:118px; height:118px; border-radius:50%; background:#fff;
+  }
+  .score-ring .val{ position:relative; font-family:'Noto Serif TC',serif; font-size:34px; font-weight:900; color:var(--primary);}
+  .score-ring .val small{ display:block; font-size:12px; color:var(--ink-soft); font-weight:500;}
+  .verdict{ font-size:17px; font-weight:700; margin-top:6px; font-family:'Noto Serif TC',serif;}
+  .verdict-sub{ color:var(--ink-soft); font-size:13.5px; margin-top:6px; line-height:1.6;}
 
-        input[type="text"], textarea, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 8px;
-            box-sizing: border-box;
-            margin-bottom: 12px;
-            font-size: 1rem;
-        }
+  .analysis-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .analysis-row .a-label{ width:110px; font-size:13px; font-weight:700; flex:0 0 auto;}
+  .analysis-row .a-bar{ flex:1; height:10px; border-radius:99px; background:var(--bg-alt); overflow:hidden;}
+  .analysis-row .a-fill{ height:100%; border-radius:99px; background:linear-gradient(90deg,var(--primary-light),var(--primary));}
+  .analysis-row .a-pct{ width:38px; text-align:right; font-size:12.5px; font-weight:700; color:var(--primary); flex:0 0 auto;}
 
-        .result-score { text-align: center; font-size: 2.2rem; font-weight: bold; color: var(--primary); margin: 15px 0; }
-        .tag { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; margin-right: 5px; color: white; }
-        .tag-strong { background-color: var(--success); }
-        .tag-weak { background-color: var(--danger); }
+  .strength-box{ display:flex; gap:10px; margin-top:18px;}
+  .strength-box .sb{ flex:1; border-radius:14px; padding:12px; font-size:13px;}
+  .strength-box .good{ background:var(--success-bg); color:var(--success);}
+  .strength-box .weak{ background:var(--error-bg); color:var(--error);}
+  .strength-box b{ display:block; font-size:12px; margin-bottom:3px; opacity:0.75;}
 
-        .analysis-item { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 0.9rem; }
-        .progress-bar { height: 6px; background: #e9ecef; border-radius: 3px; margin-bottom: 15px; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
-    </style>
+  /* ---------- Review list ---------- */
+  .review-item{ border-bottom:1px solid var(--line); padding: 16px 0;}
+  .review-item:last-child{ border-bottom:none; }
+  .review-head{ display:flex; gap:10px; align-items:flex-start;}
+  .review-mark{ flex:0 0 auto; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; color:#fff; margin-top:2px;}
+  .review-mark.correct{ background:var(--success); }
+  .review-mark.wrong{ background:var(--error); }
+  .review-q{ font-weight:700; font-size:15px; line-height:1.55; font-family:'Noto Serif TC',serif;}
+  .review-body{ margin-left:36px; margin-top:8px; font-size:13.5px; }
+  .review-line{ margin-bottom:5px; line-height:1.6;}
+  .review-line .tag{ font-weight:700; margin-right:4px;}
+  .review-line.your-wrong .val{ color:var(--error); text-decoration: line-through; text-decoration-color: rgba(192,57,43,0.5);}
+  .review-line.correct-ans .val{ color:var(--success); font-weight:700;}
+  .review-explain{ background:var(--bg-alt); border-radius:12px; padding:10px 12px; margin-top:8px; color:var(--ink-soft); line-height:1.6;}
+
+  /* ---------- Modal (題庫瀏覽) ---------- */
+  .modal-overlay{
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(62,35,19,0.5); z-index:1000;
+    display:flex; justify-content:center; align-items:center; padding:16px;
+    backdrop-filter: blur(4px);
+  }
+  .modal-content{
+    background:#fff; border-radius:var(--radius);
+    max-width:600px; width:100%; max-height:85vh;
+    display:flex; flex-direction:column;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    border:1px solid var(--line);
+    overflow:hidden;
+  }
+  .modal-header{
+    padding:18px 20px; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center;
+    background:var(--bg);
+  }
+  .modal-header h2{ font-size:18px; font-weight:700; color:var(--ink); }
+  .modal-close{
+    background:none; border:none; font-size:22px; cursor:pointer;
+    color:var(--ink-soft); font-weight:700; padding:0 8px;
+  }
+  .modal-body{
+    padding:16px 20px; overflow-y:auto; flex:1;
+  }
+  .bank-item{
+    padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .bank-item:last-child{ border-bottom:none; }
+  .bank-q{ font-weight:700; font-size:14.5px; margin-bottom:6px; color:var(--ink); line-height:1.5;}
+  .bank-ans{ font-size:13px; color:var(--success); font-weight:700; margin-bottom:4px;}
+  .bank-ex{ font-size:12.5px; color:var(--ink-soft); background:var(--bg-alt); padding:8px 12px; border-radius:10px; margin-top:6px; line-height:1.5;}
+
+  footer.note{ text-align:center; color:var(--ink-soft); font-size:11.5px; margin-top:24px; line-height:1.7;}
+
+  @media (max-width:380px){
+    .q-text{font-size:16.5px;}
+    .score-ring{width:130px;height:130px;}
+    .score-ring::before{width:100px;height:100px;}
+  }
+</style>
 </head>
 <body>
-
-<div class="app-container">
-    <header>
-        <h1>🧘‍♀️ 瑜伽考試互動刷題網</h1>
-        <div class="subtitle">RYT200 哲學 / 體位法 / 呼吸法 / 脈輪 綜合題庫</div>
-    </header>
-
-    <!-- 1. 開始主頁 -->
-    <div id="home-card" class="card active">
-        <p style="text-align:center;">準備好檢視你的學習成果了嗎？</p>
-        <button class="btn" onclick="startQuiz()">🚀 開始隨機模擬測驗</button>
-        <button class="btn btn-outline" onclick="showEditor()">✏️ 題庫管理 / 新增題目</button>
-    </div>
-
-    <!-- 2. 測驗進行區 -->
-    <div id="quiz-card" class="card">
-        <div class="progress-bar"><div id="progress" class="progress-fill"></div></div>
-        <div id="category-badge" style="font-size:0.8rem; color:#6c757d; margin-bottom:5px;"></div>
-        <div id="question-text" class="question-title"></div>
-        <img id="question-img" class="question-img" src="" style="display:none;" alt="題目圖片">
-        
-        <div id="options-container"></div>
-        <input type="text" id="short-answer-input" placeholder="請輸入答案..." style="display:none;">
-
-        <button id="next-btn" class="btn" onclick="nextQuestion()">下一題</button>
-    </div>
-
-    <!-- 3. 成績與分析區 -->
-    <div id="result-card" class="card">
-        <h2>測驗結果</h2>
-        <div class="result-score" id="score-text">0 分</div>
-        
-        <h3>📊 強弱項分析</h3>
-        <div id="analysis-tags" style="margin-bottom: 15px;"></div>
-
-        <h3>📝 解析總覽</h3>
-        <div id="review-container"></div>
-
-        <button class="btn" onclick="startQuiz()">🔄 再測驗一次</button>
-        <button class="btn btn-secondary" onclick="showHome()">🏠 回首頁</button>
-    </div>
-
-    <!-- 4. 題庫編輯區 -->
-    <div id="editor-card" class="card">
-        <h2>新增題目</h2>
-        <select id="edit-cat">
-            <option value="瑜伽哲學">瑜伽哲學</option>
-            <option value="體位法">體位法</option>
-            <option value="調息法">調息法</option>
-            <option value="脈輪與能量">脈輪與能量</option>
-        </select>
-        <select id="edit-type" onchange="toggleTypeEdit()">
-            <option value="single">選擇題</option>
-            <option value="short">簡答題</option>
-        </select>
-        <textarea id="edit-q" placeholder="請輸入題目內容..."></textarea>
-        <input type="text" id="edit-img" placeholder="圖片網址 (選填，如：https://.../photo.jpg)">
-        
-        <div id="edit-options-group">
-            <input type="text" class="edit-opt" placeholder="選項 A">
-            <input type="text" class="edit-opt" placeholder="選項 B">
-            <input type="text" class="edit-opt" placeholder="選項 C">
-            <input type="text" class="edit-opt" placeholder="選項 D">
-        </div>
-        
-        <input type="text" id="edit-ans" placeholder="正確答案（選擇題填 A/B/C/D，簡答題填文字答案）">
-        <textarea id="edit-exp" placeholder="重點解析說明..."></textarea>
-
-        <button class="btn" onclick="saveQuestion()">💾 儲存至題庫</button>
-        <button class="btn btn-secondary" onclick="showHome()">取消返回</button>
-    </div>
-</div>
+<div class="wrap" id="app"></div>
 
 <script>
-// 初始預設題庫 (包含哲學、調息法、脈輪、體位法圖片題等範例)
-let defaultQuestionBank = [
-    {
-        id: 1,
-        category: "瑜伽哲學",
-        type: "single",
-        question: "數論哲學（Sankhya）中，哪一個概念代表『永恆不變、純粹意識』？",
-        img: "",
-        options: ["Prakriti 原質", "Purusha 靈/神我", "Mahat 智力", "Ahankara 自我"],
-        answer: "B",
-        explanation: "Purusha 代表永恆不變的純粹意識；Prakriti 則為物質世界的根本原質。"
-    },
-    {
-        id: 2,
-        category: "脈輪與能量",
-        type: "single",
-        question: "關於脈輪蓮花顏色的對應，『心輪（Anahata）』代表的蓮花顏色為何？",
-        img: "",
-        options: ["綠色", "黃色", "藍色", "紫色"],
-        answer: "C",
-        explanation: "心輪代表的蓮花顏色為藍色（元素為風/氣）；代表顏色雖為綠色，但筆記重點強調蓮花顏色為藍色。"
-    },
-    {
-        id: 3,
-        category: "調息法",
-        type: "single",
-        question: "下列哪一種調息法有助於降溫冷卻體溫，但『低血壓及哮喘患者』不宜練習？",
-        img: "",
-        options: ["Bhastrika 風箱呼吸法", "Seetkari 嘶聲呼吸法", "Bhramari 蜜蜂呼吸法", "Ujjai 勝利呼吸法"],
-        answer: "B",
-        explanation: "Seetkari（嘶聲呼吸法）能冷卻身體與降低血壓，因此低血壓及呼吸道過敏患者不宜練習。"
-    },
-    {
-        id: 4,
-        category: "瑜伽哲學",
-        type: "short",
-        question: "請寫出三性（Gunas）中，由惰性（Tamas）所分化出的『五大元素』有哪些？",
-        img: "",
-        options: [],
-        answer: "空、風、火、水、土",
-        explanation: "惰性（Tamas）分化出五感受與五大元素（空、風、火、水、土）。"
-    },
-    {
-        id: 5,
-        category: "體位法",
-        type: "single",
-        question: "圖中這項身印（Mudra）動作，收縮肛門括約肌稱為？",
-        img: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=500", // 預設示範圖
-        options: ["Ashwini Mudra (馬身印)", "Vajroli Mudra (閃電身印)", "Khechari Mudra (鎖舌身印)", "Yoni Mudra (胎內手印)"],
-        answer: "A",
-        explanation: "Ashwini Mudra 為馬身印，主要動作為收縮肛門括約肌。"
-    }
+/* ============================================================
+   題庫資料 QUESTION BANK
+   type: 'mc' (單選) | 'fill' (簡答)
+   category: sankhya | sutra | hatha | mudra | chakra | nidra | asana
+   ============================================================ */
+const CATEGORY_LABEL = {
+  sankhya:'數論哲學', sutra:'瑜伽經', hatha:'哈達瑜伽',
+  mudra:'手印身印鎖印', chakra:'脈輪脈叢精微體', nidra:'舒眠瑜伽', asana:'體位法'
+};
+
+const MC_BANK = [
+// ---------------- 數論哲學 sankhya ----------------
+{cat:'sankhya', q:'數論哲學（Sankhya）的創始者是哪一位聖哲？', opts:['Kapil（卡皮拉）','Patanjali（帕坦伽利）','Swatmarama（斯瓦特拉瑪）','Vyasa（毗耶娑）'], a:0, ex:'數論哲學由聖哲 Kapil 所創立，是六大印度哲學派別之一。'},
+{cat:'sankhya', q:'數論哲學為何被稱為「數論」？', opts:['與 21 個數字相關','與 25 個數字相關','與 7 個脈輪相關','與 8 個支分相關'], a:1, ex:'數論哲學建構出 25 個主題範疇，故稱數論。'},
+{cat:'sankhya', q:'在數論哲學中，「Purusha」指的是？', opts:['物質世界的根本','永恆不變、純粹意識的靈／神我','向下分化的自我／我執','悅性所生的心智'], a:1, ex:'Purusha（靈／神我）是永恆不變的純粹意識，與物質性的 Prakriti 相對。'},
+{cat:'sankhya', q:'「Prakriti」在數論哲學中代表？', opts:['純粹意識','物質世界演化的根本','五大元素之一','八支瑜伽的第一支'], a:1, ex:'Prakriti（原質）是物質世界的根本，誤認與 Purusha 結合後展開 25 個演化。'},
+{cat:'sankhya', q:'「Ahankara」在數論演化體系中意指？', opts:['智力／Intellect','自我／我執／Ego','心智／Mind','原質／Prakriti'], a:1, ex:'Ahankara（自我／我執）由 Mahat 進一步分化而來，再向下分化出三性。'},
+{cat:'sankhya', q:'「Mahat」在數論演化體系中意指？', opts:['智力／Intellect','自我／Ego','心智／Mind','靈／神我'], a:0, ex:'Mahat 意為智力，是 Prakriti 演化出的第一個層次。'},
+{cat:'sankhya', q:'悅性（Sattva）分化出以下的什麼？', opts:['Ahankara（自我／我執）','Manas（心智／Mind）','Mahat（智力）','Prana（生命能量）'], a:1, ex:'悅性（Sattva）分化出 Manas（心智）、五感覺器官與五行動器官。'},
+{cat:'sankhya', q:'以下何者屬於「五感覺器官」？', opts:['手、腳、嘴','眼、耳、鼻、舌、皮膚','空、風、火、水、土','視覺、聲、氣味、味覺、觸覺'], a:1, ex:'五感覺器官（Jnanendriyas）為眼、耳、鼻、舌、皮膚。'},
+{cat:'sankhya', q:'以下何者「不屬於」五行動器官？', opts:['手','腳','眼','嘴'], a:2, ex:'五行動器官（Karmendriyas）為手、腳、嘴、排泄、生殖；眼屬於五感覺器官。'},
+{cat:'sankhya', q:'惰性（Tamas）主要對應的是？', opts:['五感受與五大元素','五感覺器官','心智 Manas','自我 Ahankara'], a:0, ex:'惰性（Tamas）分化出五感受／感覺，以及空、風、火、水、土五大元素。'},
+{cat:'sankhya', q:'變性（Rajas）的特性為何？', opts:['產生具體的感官器官','不產生實體，提供能量與驅動力','是純粹意識','是物質根本'], a:1, ex:'變性（Rajas）本身不產生實體，而是提供悅性與惰性演化所需的能量與驅動力。'},
+{cat:'sankhya', q:'人生的五大煩惱（Kleshas）有無知、有我、執著、排斥與？', opts:['死懼','貪婪','憤怒','幻想'], a:0, ex:'五煩惱（Kleshas）為：無知、有我、執著、死懼、排斥。'},
+{cat:'sankhya', q:'六大正統哲學派別中，著重實踐並以《瑜伽經》為核心的是？', opts:['Nyaya（正理論）','Yoga（瑜伽）','Vedanta（吠壇多）','Mimansa（彌曼差）'], a:1, ex:'Yoga 派由 Patanjali 創立，著重實踐端與《瑜伽經》。'},
+{cat:'sankhya', q:'以下何者屬於「非正統（Hetrodox）」印度哲學派別，即不依據《吠陀經》？', opts:['數論（Sankhya）','瑜伽（Yoga）','佛教(Buddha Dharma)','吠壇多（Vedanta）'], a:2, ex:'非正統派別不依《吠陀經》為本，包含佛教、耆那教與查瓦克（Charmwaka）。'},
+
+// ---------------- 瑜伽經 sutra ----------------
+{cat:'sutra', q:'帕坦伽利對「瑜伽」的核心定義為？', opts:['Chitta Vritti Nirodha（心緒轉止）','Ha Tha 平衡','Samskara 淨化','Ahimsa 非暴力'], a:0, ex:'《瑜伽經》核心定義瑜伽為「心緒轉止（Chitta Vritti Nirodha）」，心緒止息即達覺悟。'},
+{cat:'sutra', q:'《瑜伽經》全書共有幾頌（Sutras）？', opts:['108 頌','196 頌','108 支','49 頌'], a:1, ex:'《瑜伽經》共有 196 頌，分為四大篇章。'},
+{cat:'sutra', q:'《瑜伽經》第一篇的名稱為？', opts:['Samadhi Pada（三摩地篇）','Sadhana Pada（修煉篇）','Vibhuti Pada（神通篇）','Kaivalya Pada（解脫篇）'], a:0, ex:'第一篇為 Samadhi Pada（三摩地篇）。'},
+{cat:'sutra', q:'《瑜伽經》第四篇、講述最終解脫的是？', opts:['Sadhana Pada','Vibhuti Pada','Kaivalya Pada（解脫篇）','Samadhi Pada'], a:2, ex:'Kaivalya Pada（解脫篇）為第四篇，講述最終的解脫獨存。'},
+{cat:'sutra', q:'心緒止息的兩大方法為何？', opts:['Yama 與 Niyama','Abhyasa（持續練習）與 Vairagya（不執著）','Dharana 與 Dhyana','Ha 與 Tha'], a:1, ex:'心緒止息透過持續練習（Abhyasa）與不執著（Vairagya）達成。'},
+{cat:'sutra', q:'以下何者「不屬於」造成痛苦心緒傾向的五種類別？', opts:['正確知識','錯誤知識','業力法則','記憶'], a:2, ex:'五種 Vrittis 為：正確知識、錯誤知識、幻想、記憶、睡眠；業力法則不在其中。'},
+{cat:'sutra', q:'八支瑜伽（Ashtanga）的第一支為？', opts:['Niyama（精進）','Yama（持戒）','Asana（體位法）','Pratyahara（攝心）'], a:1, ex:'八支瑜伽依序為 Yama、Niyama、Asana、Pranayama、Pratyahara、Dharana、Dhyana、Samadhi。'},
+{cat:'sutra', q:'Pratyahara（攝心／制感）常以什麼比喻其精神？', opts:['太陽升起','烏龜將頭腳收回殼內','河流匯入大海','種子發芽'], a:1, ex:'Pratyahara 意指將心智從外在感官收回，如烏龜將頭腳收回殼內，不向外放逸。'},
+{cat:'sutra', q:'Dharana（凝神）的定義為？', opts:['把意識定錨在特定目標上','完全融為一體失去自我意識','不需費力持續定錨於目標','控制吸氣與呼氣的停頓'], a:0, ex:'Dharana 是把意識定錨在特定的目標上，是專注的初階練習。'},
+{cat:'sutra', q:'Dhyana（入定／冥想）與 Dharana 最大的差異在於？', opts:['Dhyana 不需費力、持續穩定地定錨在目標上','Dhyana 是道德戒律','Dhyana 專指呼吸控制','Dhyana 只能在夜間練習'], a:0, ex:'Dharana 仍需刻意將心拉回目標，而 Dhyana 已能不費力地持續安住於目標。'},
+{cat:'sutra', q:'Samadhi（三摩地）的定義為？', opts:['把意識定錨於目標','僅存在目標物，完全融為一體並失去自我意識','控制吸氣與呼氣的停頓','將心智從外在感官收回'], a:1, ex:'Samadhi 是八支瑜伽的最高境界，修行者與目標完全融合，失去對自我的覺察。'},
+{cat:'sutra', q:'以下何者「不屬於」五持戒（Yama）？', opts:['Ahimsa（非暴力）','Satya（真實）','Santosha（知足）','Asteya（不偷盜）'], a:2, ex:'Santosha（知足）屬於五精進（Niyama），不屬於五持戒（Yama）。'},
+{cat:'sutra', q:'精進（Niyama）中的「Tapas」意指？', opts:['清淨','苦行／熱情','知足','敬信神'], a:1, ex:'Tapas 意為苦行／熱情，是持續修行的內在燃燒力。'},
+{cat:'sutra', q:'精進（Niyama）中的「Ishvara Pranidhana」的意思為？', opts:['自我研讀聖典','敬信神／安住於至上','清淨身心','不貪婪'], a:1, ex:'Ishvara Pranidhana 是五精進之一，意為敬信神、順應宇宙的臣服，安住於至上。'},
+{cat:'sutra', q:'持戒（yama）中的「Aparigraha」的意思為？', opts:['清淨','不貪婪','苦行','自我研讀'], a:1, ex:'Aparigraha 是五持戒之一，意為不貪婪、不過度囤積。'},
+{cat:'sutra', q:'精進（Niyama）中「Svadhyaya」的意思為？', opts:['自我研讀／聖典研習','清淨','知足','敬信神'], a:0, ex:'Svadhyaya 屬五精進之一，意為自我研讀與聖典研習。'},
+{cat:'sutra', q:'「Asana」在八支瑜伽中的定義為？', opts:['道德戒律','穩定且舒適的姿勢','控制呼吸的停頓','把心智從感官收回'], a:1, ex:'Asana（體位法）在《瑜伽經》中被定義為穩定且舒適的姿勢。'},
+
+// ---------------- 哈達瑜伽／調息淨化 hatha ----------------
+{cat:'hatha', q:'《哈達瑜伽經》的作者是哪位聖哲？', opts:['Patanjali','Kapil','Swatmarama（斯瓦特拉瑪）','Vyasa'], a:2, ex:'《哈達瑜伽經》由聖哲 Swatmarama 所著。'},
+{cat:'hatha', q:'「Ha」在哈達瑜伽中代表？', opts:['月／陰／左鼻孔','日／陽／右鼻孔／太陽脈 Pingala','中脈 Sushumna','心智之流'], a:1, ex:'Ha 代表日、陽、右鼻孔與太陽脈（Pingala Nadi）。'},
+{cat:'hatha', q:'「Tha」在哈達瑜伽中代表？', opts:['日／陽／右鼻孔','月／陰／左鼻孔／月亮脈 Ida','中脈 Sushumna','火之元素'], a:1, ex:'Tha 代表月、陰、左鼻孔與月亮脈（Ida Nadi）。'},
+{cat:'hatha', q:'哈達瑜伽與帕坦伽利瑜伽經最大的差異在於？', opts:['哈達瑜伽透過控制身體與呼吸來進一步控制心智','哈達瑜伽只重視冥想不重視體位法','瑜伽經著重外在戒律而非心智','兩者完全相同並無差異'], a:0, ex:'瑜伽經著重由高至低直接控制心智；哈達瑜伽則透過控制身體與呼吸間接控制心智。'},
+{cat:'hatha', q:'以下何者「不屬於」六大淨化法（Shatkarma）？', opts:['Neti（洗鼻法）','Trataka（凝視法）','Bhastrika（風箱呼吸法）','Nauli（腹部按摩法）'], a:2, ex:'Bhastrika 屬於調息法（Pranayama），並非六大淨化法之一。'},
+{cat:'hatha', q:'「Neti」淨化法指的是？', opts:['洗鼻法','灌腸法','腹部按摩法','凝視法'], a:0, ex:'Neti 是清潔鼻腔通道的洗鼻法。'},
+{cat:'hatha', q:'「Trataka」淨化法指的是？', opts:['前額葉淨化法','凝視法','灌腸法','內部淨化法'], a:1, ex:'Trataka 是專注凝視特定目標（如燭光）以淨化心智的凝視法。'},
+{cat:'hatha', q:'「Kapalbhati」淨化法指的是？', opts:['腹部按摩法','洗鼻法','前額葉淨化法','灌腸法'], a:2, ex:'Kapalbhati 意為前額葉淨化法，透過急促呼吸淨化頭腦。'},
+{cat:'hatha', q:'「Nauli」淨化法指的是？', opts:['腹部按摩法','灌腸法','凝視法','內部淨化法'], a:0, ex:'Nauli 是透過腹部肌肉滾動按摩內臟的淨化法。'},
+{cat:'hatha', q:'「Dhauti」淨化法指的是？', opts:['內部淨化法','灌腸法','洗鼻法','凝視法'], a:0, ex:'Dhauti 泛指清潔消化道的內部淨化法。'},
+{cat:'hatha', q:'Nadi Shodhan Pranayama（陰陽呼吸法）主要的好處為？', opts:['快速增加血液含氧量','平衡左右脈與陰陽能量、平撫神經系統','冷卻身體降低血壓','震動腦神經助眠'], a:1, ex:'Nadi Shodhan 平衡左右脈（Ida、Pingala）與陰陽能量，減輕壓力焦慮並提升專注力。'},
+{cat:'hatha', q:'Sheetali／Seetkari Pranayama（清涼呼吸法）主要的好處為？', opts:['增加體內熱能','冷卻身體與血液系統、降低體溫與血壓','促進消化火','清除黏液與毒素'], a:1, ex:'清涼呼吸法能冷卻身體與血液系統，舒緩憤怒與焦慮。'},
+{cat:'hatha', q:'Bhramari Pranayama（蜜蜂呼吸法）的作用為？', opts:['透過蜂鳴聲震動平撫腦神經，助眠降血壓','快速增加血液含氧量','冷卻身體','增強肺活量以利體位法覺知'], a:0, ex:'蜂鳴聲的震動能平撫腦神經，緩解緊張、頭痛與失眠，並有助於降血壓。'},
+{cat:'hatha', q:'Ujjayi Pranayama 又稱為？', opts:['勝利呼吸法','風箱呼吸法','清涼呼吸法','蜜蜂呼吸法'], a:0, ex:'Ujjayi（勝利呼吸法）能增加體內熱能、清理呼吸道並幫助保持覺知。'},
+{cat:'hatha', q:'Bhastrika Pranayama（風箱呼吸法）的禁忌對象「不包含」以下何者？', opts:['高血壓、心臟病患者','癲癇、青光眼患者','懷孕期間、近期腹部手術者','輕微感冒的一般健康成人'], a:3, ex:'風箱呼吸法對高血壓、心臟病、癲癇、青光眼、胃潰瘍、懷孕及術後者皆屬嚴禁對象，一般健康成人非其列。'},
+{cat:'hatha', q:'哪一種調息法「不適合」嚴重耳部感染者練習？', opts:['Bhramari Pranayama（蜜蜂呼吸法）','Nadi Shodhan Pranayama','Ujjayi Pranayama','Sheetali Pranayama'], a:0, ex:'Bhramari 因涉及耳部共鳴震動，嚴重耳部感染者不宜練習。'},
+{cat:'hatha', q:'哪一種調息法特別能舒緩憤怒與焦慮，並有助降溫？', opts:['Bhastrika Pranayama','Sheetali／Seetkari Pranayama','Ujjayi Pranayama','Bhramari Pranayama'], a:1, ex:'清涼呼吸法（Sheetali／Seetkari）能降低體溫血壓，舒緩憤怒與焦慮。'},
+
+// ---------------- 手印身印鎖印 mudra ----------------
+{cat:'mudra', q:'Jnana Mudra（智慧手印）的手勢為？', opts:['掌心朝上','掌心朝下','雙手交握於胸前','拇指觸額頭'], a:1, ex:'Jnana Mudra 掌心朝下，幫助心緒安定、提升專注與覺察。'},
+{cat:'mudra', q:'Chin Mudra（意識手印）的手勢特徵為？', opts:['掌心朝上','掌心朝下，拇指與食指輕觸','雙掌合十','手指交扣'], a:1, ex:'Chin Mudra 掌心朝上，拇指與食指輕觸，象徵個體意識與宇宙意識的連結。'},
+{cat:'mudra', q:'Yoni Mudra（胎內手印）主要象徵？', opts:['憤怒與力量','回到內在、創造與孕育能量','攻擊與防禦','向外擴張的能量'], a:1, ex:'Yoni Mudra 象徵回到內在，幫助放鬆神經系統、穩定情緒並重新與自己連結。'},
+{cat:'mudra', q:'Bhairava Mudra（右手在上的憤怒/濕婆手印）象徵？', opts:['柔軟、接納與陰性能量','穩定、力量與陽性能量','攝心與制感','敬信與臣服'], a:1, ex:'Bhairava Mudra 右手在上，象徵穩定、力量與陽性能量。'},
+{cat:'mudra', q:'若左手在上，則此手印稱為 Bhairavi Mudra的帕瓦蒂/女神手印，象徵？', opts:['穩定與陽性能量','柔軟、接納與陰性能量','攻擊性','排斥感'], a:1, ex:'Bhairavi Mudra（女神手印）左手在上，象徵柔軟、接納與陰性能量。'},
+{cat:'mudra', q:'Sambhavi Mudra 的凝視焦點為？', opts:['鼻尖','眉心（兩眉之間）','喉輪','頂輪'], a:1, ex:'Shambhavi Mudra 是專注凝視兩眉之間（眉心）的頭部身印。'},
+{cat:'mudra', q:'Nasikagra Drishti Mudra 的凝視焦點為？', opts:['眉心','鼻尖','心輪','天空'], a:1, ex:'Nasikagra Drishti Mudra 是專注凝視鼻尖的身印。'},
+{cat:'mudra', q:'Khechari Mudra 是指？', opts:['鎖舌身印','關七竅身印','馬身印','倒轉身印'], a:0, ex:'Khechari Mudra 為鎖舌身印，屬於頭部身印之一。'},
+{cat:'mudra', q:'Sanmukhi Mudra 是指？', opts:['鎖舌身印','關七竅身印','瑜伽身印','啤酒肚身印'], a:1, ex:'Sanmukhi Mudra 是以雙手輕閉七竅（眼耳鼻口）的身印。'},
+{cat:'mudra', q:'Ashwini Mudra（馬身印）的動作為？', opts:['收縮尿道往上提','收縮肛門括約肌','雙掌合十','拇指觸食指'], a:1, ex:'Ashwini Mudra 屬海底輪身印，動作為收縮肛門括約肌。'},
+{cat:'mudra', q:'Vajroli／Sahajoli Mudra （閃電身印/自發身印）的動作為？', opts:['收縮肛門括約肌','收縮尿道往上提','凝視鼻尖','鎖舌向上'], a:1, ex:'Vajroli／Sahajoli Mudra 閃電身印/自發身印屬海底輪身印，動作為收縮尿道往上提。'},
+{cat:'mudra', q:'Jalandhara Bandha 指的是哪一種鎖印？', opts:['喉輪鎖印','臍輪鎖印／腹鎖','海底輪鎖印／根鎖','大鎖印'], a:0, ex:'Jalandhara Bandha 為喉輪鎖印（Throat Lock）。'},
+{cat:'mudra', q:'Uddiyana Bandha 指的是哪一種鎖印？', opts:['喉輪鎖印','臍輪鎖印／腹鎖','海底輪鎖印／根鎖','大鎖印'], a:1, ex:'Uddiyana Bandha 為臍輪鎖印，即腹鎖（Abdominal Lock）。'},
+{cat:'mudra', q:'Moola Bandha 指的是哪一種鎖印？', opts:['喉輪鎖印','臍輪鎖印','海底輪鎖印／根鎖','大鎖印'], a:2, ex:'Moola Bandha 為海底輪鎖印，即根鎖（Root Lock）。'},
+{cat:'mudra', q:'Maha Bandha（大鎖印）的定義為？', opts:['僅指喉輪鎖印','僅指腹鎖','同時結合喉輪、臍輪與海底輪三個鎖印','是一種手印而非鎖印'], a:2, ex:'Maha Bandha（大鎖印）同時結合 Jalandhara、Uddiyana 與 Moola 三個鎖印。'},
+
+// ---------------- 脈輪精微體 chakra ----------------
+{cat:'chakra', q:'海底輪（Mooladhara）對應的元素為？', opts:['水','火','土','空'], a:2, ex:'Mooladhara（海底輪）位於會陰／脊椎骨底端，對應土元素。'},
+{cat:'chakra', q:'生殖輪（Swadhisthana）對應的元素為？', opts:['土','水','火','風'], a:1, ex:'Swadhisthana（生殖輪）位於骶骨區域，對應水元素。'},
+{cat:'chakra', q:'臍輪（Manipura）對應的元素為？', opts:['水','火','風','空'], a:1, ex:'Manipura（臍輪）位於太陽神經叢，對應火元素。'},
+{cat:'chakra', q:'心輪（Anahata）對應的元素為？', opts:['火','風／氣','空','土'], a:1, ex:'Anahata（心輪）位於胸部中央，對應風／氣元素。'},
+{cat:'chakra', q:'喉輪（Vishuddhi）對應的元素為？', opts:['風','空','心智','水'], a:1, ex:'Vishuddhi（喉輪）位於喉嚨區域，對應空（Ether）元素。'},
+{cat:'chakra', q:'眉心輪（Ajna）的花瓣數為？', opts:['2 片','4 片','10 片','千瓣'], a:0, ex:'Ajna（眉心輪）僅有 2 片花瓣，對應心智／超越元素的層次。'},
+{cat:'chakra', q:'頂輪（Sahasrara）的花瓣數為？', opts:['12 片','16 片','千瓣（1000）','2 片'], a:2, ex:'Sahasrara（頂輪）擁有千瓣蓮花，象徵宇宙意識的圓滿。'},
+{cat:'chakra', q:'海底輪（Mooladhara）的花瓣數為？', opts:['4 片','6 片','10 片','12 片'], a:0, ex:'Mooladhara（海底輪）有 4 片花瓣。'},
+{cat:'chakra', q:'臍輪（Manipura）的蓮花顏色為？', opts:['暗紅色','鮮紅色','黃色','藍色'], a:2, ex:'Manipura（臍輪）對應黃色蓮花，象徵火元素的能量。'},
+{cat:'chakra', q:'心輪（Anahata）的蓮花顏色為？', opts:['黃色','藍色','紫色','銀色'], a:1, ex:'Anahata（心輪）對應藍色蓮花。'},
+{cat:'chakra', q:'喉輪（Vishuddhi）的蓮花顏色為？', opts:['藍色','紫色','白色','暗紅色'], a:1, ex:'Vishuddhi（喉輪）對應紫色蓮花。'},
+{cat:'chakra', q:'頂輪（Sahasrara）的蓮花顏色為？', opts:['白色（濕婆在其中）','黃色','銀色','暗紅色'], a:0, ex:'Sahasrara（頂輪）呈白色，象徵濕婆（純粹意識）在其中安住。'},
+{cat:'chakra', q:'「Granthi」一詞的原意為？', opts:['結／阻礙','光／能量','蓮花／花瓣','呼吸／氣息'], a:0, ex:'Granthi 原意為「結」或「阻礙」，指中脈上妨礙生命能量上升的能量結節。'},
+{cat:'chakra', q:'Brahma Granthi（梵天結）由哪兩個脈輪組成？', opts:['臍輪與心輪','喉輪與眉心輪','海底輪與生殖輪','心輪與喉輪'], a:2, ex:'Brahma Granthi 由海底輪與生殖輪組成，代表對物質世界與本能慾望的執著。'},
+{cat:'chakra', q:'Vishnu Granthi（毗濕奴結）由哪兩個脈輪組成？', opts:['海底輪與生殖輪','臍輪與心輪','喉輪與眉心輪','心輪與頂輪'], a:1, ex:'Vishnu Granthi 由臍輪與心輪組成，代表對情感、關係與名利的執著。'},
+{cat:'chakra', q:'Rudra／Shiva Granthi（濕婆結）由哪兩個脈輪組成？', opts:['海底輪與生殖輪','臍輪與心輪','喉輪與眉心輪','眉心輪與頂輪'], a:2, ex:'Rudra Granthi 由喉輪與眉心輪組成，代表對個人智力與靈性能力的執著。'},
+{cat:'chakra', q:'精微體五層（Kosha）中，最內層、與肉身相關的是？', opts:['Pranamaya Kosha（能量鞘）','Annamaya Kosha（食物鞘）','Manomaya Kosha（心智鞘）','Anandamaya Kosha（喜悅鞘）'], a:1, ex:'Annamaya Kosha（食物鞘）是最內層，對應肉體層面。'},
+{cat:'chakra', q:'「Anandamaya Kosha」意指？', opts:['食物鞘','能量鞘','智慧鞘','喜悅鞘'], a:3, ex:'Anandamaya Kosha 為喜悅鞘，是精微體五層中最外層。'},
+{cat:'chakra', q:'五大生命氣（Prana Vayus）中，主管消化功能、位於上腹部的是？', opts:['Prana Vayu呼吸氣','Samana Vayu消化氣','Udana Vayu外接氣','Vyana Vayu調和氣'], a:1, ex:'Samana Vayu 主管肚臍區的消化功能。'},
+{cat:'chakra', q:'三大主脈中，位於中央的「中脈」稱為？', opts:['Ida Nadi','Pingala Nadi','Sushumna Nadi','Vishuddhi Nadi'], a:2, ex:'Sushumna Nadi（中脈）位於脊柱中央，是能量上升的主要通道。'},
+{cat:'chakra', q:'Ida Nadi 對應的是？', opts:['右脈／陽／太陽','左脈／陰／月亮','中脈','喉輪能量'], a:1, ex:'Ida Nadi 為左脈，對應陰性能量與月亮。'},
+{cat:'chakra', q:'Pingala Nadi 對應的是？', opts:['左脈／陰／月亮','右脈／陽／太陽','中脈','海底輪能量'], a:1, ex:'Pingala Nadi 為右脈，對應陽性能量與太陽。'},
+{cat:'chakra', q:'梵咒（Mantra）字根 mananaat 與 trayate 分別意指？', opts:['光明與黑暗','心靈的束縛與釋放','聲音與寂靜','上升與下降'], a:1, ex:'Mantra 一詞取自 mananaat（心靈的束縛）與 trayate（釋放），能將心智從不潔與不滿足中解放。'},
+
+// ---------------- 舒眠冥想 nidra ----------------
+{cat:'nidra', q:'舒眠瑜伽（Yoga Nidra）的第一個步驟為？', opts:['Sankalpa（意念誓言）','Preparation（準備與放鬆）','Visualization（視覺化）','Externalization（喚醒）'], a:1, ex:'Yoga Nidra 的第一步為 Preparation，先讓身心進入放鬆準備狀態。'},
+{cat:'nidra', q:'舒眠瑜伽中，設定個人意念／誓言的步驟稱為？', opts:['Relaxtion（放鬆）','Sense Withdraw（感官撤離）','Breath Awareness（呼吸覺知）','Reslove（決意）'], a:3, ex:'Reslove（決意） 是設立內在意念或誓言的步驟，會在流程開始與結束時各進行一次。'},
+{cat:'nidra', q:'舒眠瑜伽中，身體掃描的步驟稱為？', opts:['Externalization（具體化外在感知）','Rotation of Consciousness（意識輪轉）','Rotation of Consciousness（意識轉移）','Reslove（決意）'], a:1, ex:'Rotation of Consciousness（意識輪轉）即引導意識依序掃描全身各部位。'},
+{cat:'nidra', q:'凝神（Dharana）的特徵為？', opts:['心智已完全不受干擾','心智仍會不斷干擾，需持續將注意力拉回目標','僅存在目標物並失去自我意識','屬於八支瑜伽的最後一支'], a:1, ex:'Dharana 階段心智仍會受到干擾，修練者需不斷把注意力拉回專注的目標。'},
+{cat:'nidra', q:'以下何者「不是」冥想的兩大類型之一？', opts:['主動冥想（Active Meditation）','被動冥想（Passive Meditation）','強制冥想','以上皆是冥想類型'], a:2, ex:'冥想僅分為主動冥想與被動冥想兩大類型，並無「強制冥想」的分類。'},
+{cat:'nidra', q:'以下何者最符合「被動冥想」的範例？', opts:['日常工作中主動保持專注','清晨或睡前洗澡後坐下開始冥想練習','邊走路邊冥想','無固定姿勢隨時進行'], a:1, ex:'被動冥想是坐在特定姿勢下開始的冥想練習，如清晨或睡前洗澡後進行。'},
+{cat:'nidra', q:'冥想五大步驟中，「感官撤離」對應哪一個梵文概念？', opts:['Dharana','Pratyahara','Dhyana','Samadhi'], a:1, ex:'冥想第三步驟為 Sense Withdrawal（感官撤離），對應八支瑜伽中的 Pratyahara。'},
+{cat:'nidra', q:'冥想五大步驟的最後一步為？', opts:['Body Stillness','Dharana','Meditation（Dhyana）','Preparation'], a:2, ex:'冥想五大步驟依序為：準備、身體靜止、感官撤離、凝神、最後進入冥想（Dhyana）。'},
+
 ];
 
-// 本地存儲或使用預設
-let questionBank = JSON.parse(localStorage.getItem('yoga_quiz_db')) || defaultQuestionBank;
+/* 體位法簡答題庫 —— 已涵蓋講義中全部 50 個體位法 */
+const FILL_BANK = [
+{q:'山式（Mountain Pose）的梵文羅馬拼音為？', a:['tadasana'], ex:'Tadasana：山式，是站姿體位法的基礎起始式。'},
+{q:'下犬式（Downward Facing Dog Pose）的梵文羅馬拼音為？', a:['adho mukha svanasana'], ex:'Adho Mukha Svanasana：下犬式，瑜伽中常見的基本動作，可以伸展全身。'},
+{q:'大休息／攤屍式（Corpse Pose）的梵文羅馬拼音為？', a:['savasana','shavasana'], ex:'Savasana／Shavasana：大休息式，練習尾聲用於徹底放鬆。'},
+{q:'戰士一式（Warrior Pose 1）的梵文羅馬拼音為？', a:['virabhadrasana 1','virabhadrasana1','virabhadrasana i'], ex:'Virabhadrasana 1：戰士一式，正面朝前的站姿戰士序列。'},
+{q:'戰士二式（Warrior Pose 2）的梵文羅馬拼音為？', a:['virabhadrasana 2','virabhadrasana2','virabhadrasana ii'], ex:'Virabhadrasana 2：戰士二式，髖部側開展的站姿戰士序列。'},
+{q:'戰士三式（Warrior Pose 3）的梵文羅馬拼音為？', a:['virabhadrasana 3','virabhadrasana3','virabhadrasana iii'], ex:'Virabhadrasana 3：戰士三式，考驗平衡與核心穩定的站姿體位法。'},
+{q:'樹式（Tree Pose）的梵文羅馬拼音為？', a:['vrikshasana'], ex:'Vrikshasana：樹式，訓練單腳平衡的代表性體位法。'},
+{q:'眼鏡蛇式（Cobra Pose）的梵文羅馬拼音為？', a:['bhujangasana'], ex:'Bhujangasana：眼鏡蛇式，屬於後彎的常見體位法。'},
+{q:'鱷魚式／四柱支撐（Four Limb Staff Pose）的梵文羅馬拼音為？', a:['chaturanga dandasana'], ex:'Chaturanga Dandasana：鱷魚式，常見於拜日式串連中的過渡動作。'},
+{q:'三角式（Triangle Pose）的梵文羅馬拼音為？', a:['trikonasana'], ex:'Trikonasana：三角式，經典的站姿側伸展體位法。'},
+{q:'幻椅式（Chair Pose）的梵文羅馬拼音為？', a:['utkatasana'], ex:'Utkatasana：幻椅式，強化下肢力量的站姿體位法。'},
+{q:'鷹式（Eagle Pose）的梵文羅馬拼音為？', a:['garudasana'], ex:'Garudasana：鷹式，考驗平衡與四肢纏繞的體位法。'},
+{q:'舞王式（Lord of the Dance Pose）的梵文羅馬拼音為？', a:['natarajasana'], ex:'Natarajasana：舞王式，結合平衡與後彎的進階體位法。'},
+{q:'烏鴉式（Crane／Crow Pose）的梵文羅馬拼音為？', a:['bakasana'], ex:'Bakasana：烏鴉式，經典的手臂平衡體位法。'},
+{q:'駱駝式（Camel Pose）的梵文羅馬拼音為？', a:['ushtrasana'], ex:'Ushtrasana：駱駝式，跪姿深度後彎體位法。'},
+{q:'魚式（Fish Pose）的梵文羅馬拼音為？', a:['matsyasana'], ex:'Matsyasana：魚式，常搭配肩倒立作為反向平衡。'},
+{q:'弓式（Bow Pose）的梵文羅馬拼音為？', a:['dhanurasana'], ex:'Dhanurasana：弓式，俯臥後彎的核心體位法。'},
+{q:'犁鋤式（Plow Pose）的梵文羅馬拼音為？', a:['halasana'], ex:'Halasana：犁鋤式，將身體倒轉、雙腿向頭後方伸展，能深層伸展肩頸與背部脊椎。'},
+{q:'肩倒立式（Shoulder Stand Pose）的梵文羅馬拼音為？', a:['sarvangasana'], ex:'Sarvangasana：肩倒立式，被稱為體位法之後，以肩膀與手臂支撐身體重量。'},
+{q:'橋式（Bridge Pose）的梵文羅馬拼音為？', a:['setu bandhasana'], ex:'Setu Bandhasana：橋式，溫和的後彎與髖部開展體位法。'},
+{q:'頭倒立式（Headstand Pose）的梵文羅馬拼音為？', a:['sirsasana'], ex:'Sirsasana：頭倒立式，被稱為體位法之王。'},
+{q:'手碰腳式（Hand to Foot Pose）的梵文羅馬拼音為？', a:['padahastasana'], ex:'Padahastasana：手碰腳式，站姿前彎的變化式之一。'},
+{q:'高弓步式（High Lunge）的梵文羅馬拼音為？', a:['utthita ashwa sanchalanasana'], ex:'Utthita Ashwa Sanchalanasana：高弓步式，強化下半身與核心的經典動作。'},
+{q:'平板式（Plank Pose）的梵文羅馬拼音為？', a:['phalakasana'], ex:'Phalakasana：平板式，強化核心與手臂力量的基礎體位法。'},
+{q:'八支點地式（Eight Limbed Salutation）的梵文羅馬拼音為？', a:['ashtanga namaskara'], ex:'Ashtanga Namaskara：八支點地式，傳統拜日式中的過渡體位法。'},
+{q:'上犬式（Upward Facing Dog）的梵文羅馬拼音為？', a:['urdhvamukha svanasana','urdhva mukha svanasana'], ex:'Urdhvamukha Svanasana：上犬式，伸展身體前側肌群的體位法。'},
+{q:'站立手抓腳趾式（Extended Hand-to-Big-Toe Pose）的梵文羅馬拼音為？', a:['utthita hasta padangusthasana'], ex:'Utthita Hasta Padangusthasana：站立手抓腳趾式，考驗平衡與柔軟度。'},
+{q:'金字塔式／側伸展式（Intense Side Stretch Pose）的梵文羅馬拼音為？', a:['parsvottanasana'], ex:'Parsvottanasana：金字塔式，站姿前彎的側伸展體位法。'},
+{q:'扭轉三角式（Revolved Triangle Pose）的梵文羅馬拼音為？', a:['parivrtta trikonasana'], ex:'Parivrtta Trikonasana：扭轉三角式，三角式的脊椎扭轉變化式。'},
+{q:'寬腳分開站立前彎式／雙角式（Wide-Legged Forward Bend）的梵文羅馬拼音為？', a:['prasarita padottanasana'], ex:'Prasarita Padottanasana：雙角式，寬站姿的前彎體位法。'},
+{q:'側角伸展式（Extended Side Angle Pose）的梵文羅馬拼音為？', a:['utthita parsvakonasana'], ex:'Utthita Parsvakonasana：側角伸展式，強化下肢並伸展體側的站姿體位法。'},
+{q:'扭轉側角式（Revolved Side Angle Pose）的梵文羅馬拼音為？', a:['parivrtta parsvakonasana'], ex:'Parivrtta Parsvakonasana：側角伸展式的脊椎扭轉變化式。'},
+{q:'臥英雄式（Reclined Hero Pose）的梵文羅馬拼音為？', a:['supta virasana'], ex:'Supta Virasana：臥英雄式，放鬆、深度伸展大腿前側的體位法。'},
+{q:'側平板式（Side Plank Pose）的梵文羅馬拼音為？', a:['vasisthasana'], ex:'Vasisthasana：側平板式，考驗手臂與核心側向力量的平衡體位法。'},
+{q:'神猴哈奴曼式／劈腿式（Monkey Pose）的梵文羅馬拼音為？', a:['hanumanasana'], ex:'Hanumanasana：哈奴曼式，前後劈腿的深度伸展體位法。'},
+{q:'杖式（Staff Pose）的梵文羅馬拼音為？', a:['dandasana'], ex:'Dandasana：杖式，坐姿體位法的基礎起始式。'},
+{q:'牛面式（Cow Face Pose）的梵文羅馬拼音為？', a:['gomukhasana'], ex:'Gomukhasana：牛面式，雙腿上下交疊坐姿如牛面，雙手在背後一上一下互扣，伸展肩膀與髖部的坐姿體位法。'},
+{q:'單腿鴿王式（One-Legged King Pigeon Pose）的梵文羅馬拼音為？', a:['eka pada rajakapotasana'], ex:'Eka Pada Rajakapotasana：單腿鴿王式，深度開髖的後彎體位法。'},
+{q:'兔子式（Rabbit Pose）的梵文羅馬拼音為？', a:['sashankasana'], ex:'Sashankasana：兔子式，跪姿前彎、按摩頭頂的體位法。'},
+{q:'門栓式（Gate Pose）的梵文羅馬拼音為？', a:['parighasana'], ex:'Parighasana：門栓式，跪姿的側向伸展體位法。'},
+{q:'單腿頭枕膝前屈式（Head to Knee Pose）的梵文羅馬拼音為？', a:['janu sirsasana'], ex:'Janu Sirsasana：頭碰膝式，坐姿單腿前彎的體位法。'},
+{q:'坐姿前彎式／西方伸展式（Seated Forward Bend Pose）的梵文羅馬拼音為？', a:['paschimottanasana'], ex:'Paschimottanasana：坐姿前彎式，伸展整條背部與腿後側。'},
+{q:'反向支架式／前部伸展式（Intense Frontal Stretch Pose）的梵文羅馬拼音為？', a:['purvottanasana'], ex:'Purvottanasana：反向支架式，伸展身體前側的體位法。'},
+{q:'船式（Boat Pose）的梵文羅馬拼音為？', a:['naukasana'], ex:'Naukasana：船式，強化核心力量的坐姿平衡體位法。'},
+{q:'半脊柱扭轉式（Half Spinal Twist Pose）的梵文羅馬拼音為？', a:['ardha matsyendrasana'], ex:'Ardha Matsyendrasana：半脊柱扭轉式，坐姿脊椎扭轉的代表體位法。'},
+{q:'蝗蟲式（Locust Pose）的梵文羅馬拼音為？', a:['salabhasana'], ex:'Salabhasana：蝗蟲式，俯臥後彎、強化背部力量的體位法。'},
+{q:'輪式（Wheel Pose）的梵文羅馬拼音為？', a:['chakrasana'], ex:'Chakrasana：輪式，深度後彎的進階體位法。'},
+{q:'嬰兒式（Child Pose）的梵文羅馬拼音為？', a:['balasana'], ex:'Balasana：嬰兒式，用於休息與恢復的跪姿前彎體位法。'},
+{q:'孔雀起舞式／肘倒立（Feathered Peacock Pose）的梵文羅馬拼音為？', a:['pincha mayurasana'], ex:'Pincha Mayurasana：孔雀起舞式，前臂支撐的倒立體位法。'},
+{q:'腹部扭轉式（Belly Twist Pose）的梵文羅馬拼音為？', a:['jathara parivartanasana'], ex:'Jathara Parivartanasana：腹部扭轉式，仰臥的脊椎扭轉體位法。'},
+];
 
-let currentQuiz = [];
-let currentIndex = 0;
-let userAnswers = [];
+/* ============================================================
+   應用程式邏輯
+   ============================================================ */
+const TOTAL_MC = 17, TOTAL_FILL = 3;
+let state = { screen:'intro', questions:[], current:0, answers:[], showBankModal: false };
 
-function showCard(id) {
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+function normalize(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
+function normalizeNoSpace(s){ return normalize(s).replace(/\s+/g,''); }
+
+function buildQuiz(){
+  const mcPicks = shuffle(MC_BANK).slice(0, TOTAL_MC).map(q=>({...q, type:'mc'}));
+  const fillPicks = shuffle(FILL_BANK).slice(0, TOTAL_FILL).map(q=>({...q, type:'fill', cat:'asana'}));
+  const all = [...mcPicks, ...fillPicks];
+  state.questions = all;
+  state.current = 0;
+  state.answers = new Array(all.length).fill(null);
+  state.screen = 'quiz';
+  render();
 }
 
-function showHome() { showCard('home-card'); }
-function showEditor() { showCard('editor-card'); }
+function selectMC(optIdx){
+  state.answers[state.current] = optIdx;
+  render();
+}
+function typeFill(val){
+  state.answers[state.current] = val;
+}
+function goNext(){
+  if(state.current < state.questions.length-1){ state.current++; render(); }
+  else { state.screen='result'; render(); }
+}
+function goPrev(){
+  if(state.current>0){ state.current--; render(); }
+}
+function restart(){ state.screen='intro'; render(); }
 
-function startQuiz() {
-    // 隨機抽 5 題（或全部題目）
-    currentQuiz = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, 5);
-    currentIndex = 0;
-    userAnswers = [];
-    showCard('quiz-card');
-    renderQuestion();
+function toggleBankModal(show){
+  state.showBankModal = show;
+  render();
 }
 
-function renderQuestion() {
-    let q = currentQuiz[currentIndex];
-    document.getElementById('progress').style.width = `${((currentIndex + 1) / currentQuiz.length) * 100}%`;
-    document.getElementById('category-badge').innerText = `[${q.category}] 第 ${currentIndex + 1} / ${currentQuiz.length} 題`;
-    document.getElementById('question-text').innerText = q.question;
-    
-    let imgEl = document.getElementById('question-img');
-    if (q.img) {
-        imgEl.src = q.img;
-        imgEl.style.display = 'block';
+function isCorrect(q, ans){
+  if(ans===null || ans===undefined || ans==='') return false;
+  if(q.type==='mc') return ans === q.a;
+  const na = normalize(ans), nna = normalizeNoSpace(ans);
+  return q.a.some(valid => normalize(valid) === na || normalizeNoSpace(valid) === nna);
+}
+
+function renderHeader(){
+  return `
+    <header class="app-header">
+      <div class="eyebrow"><span class="sun-mark"></span> RYT200 YOGA PHILOSOPHY</div>
+      <h1>瑜伽哲學模擬考</h1>
+      <p>涵蓋數論、瑜伽經、哈達、脈輪精微體與體位法拼音</p>
+    </header>
+  `;
+}
+
+function renderIntro(){
+  return `
+    ${renderHeader()}
+    <div class="card">
+      <h2>準備好開始測驗了嗎？</h2>
+      <p style="color:var(--ink-soft); font-size:14px; margin-top:8px; line-height:1.6;">
+        測驗共 <strong>20 題</strong>，包含 <strong>17 題選擇題＋3 題體位法梵文拼音簡答題</strong>。<br><br>
+
+📝 本測驗題目以瑜伽哲學課本內容為基礎，由 AI 整理後，再經人工檢視與優化出題；每次測驗皆會<strong>隨機抽取題目</strong>。<br><br>
+
+🔒 <strong>測驗資料不會儲存於任何地方，也不會有後台查看或紀錄您的測驗成績</strong>，僅供個人學習與練習使用，請放心作答。<br><br>
+
+如果遇到題目敘述不清楚、答案有疑慮，或覺得題目好像怪怪的，也歡迎提出來，方便後續修正與維護題庫。<br><br>
+
+祝您學習順利，測驗愉快！📒😄
+      </p>
+      <div class="intro-grid">
+        <div class="intro-stat"><b>20</b><span>總題數</span></div>
+        <div class="intro-stat"><b>100</b><span>總分</span></div>
+        <div class="intro-stat"><b>7</b><span>涵蓋單元</span></div>
+      </div>
+      <div class="cat-chips">
+        ${Object.values(CATEGORY_LABEL).map(c=>`<span class="chip">${c}</span>`).join('')}
+      </div>
+      <div style="margin-top:24px; display:flex; flex-direction:column; gap:10px;">
+        <button class="btn" onclick="buildQuiz()">開始隨機模擬考</button>
+        <button class="btn secondary" onclick="toggleBankModal(true)">瀏覽完整題庫 (${MC_BANK.length + FILL_BANK.length} 題)</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderQuiz(){
+  const q = state.questions[state.current];
+  const ans = state.answers[state.current];
+  const total = state.questions.length;
+
+  const beads = state.questions.map((_, i) => {
+    let cls = 'bead';
+    if(i === state.current) cls += ' current';
+    else if(state.answers[i] !== null && state.answers[i] !== '') cls += ' done';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+
+  let inputHtml = '';
+  if(q.type === 'mc'){
+    inputHtml = `<div class="options">
+      ${q.opts.map((opt, i) => `
+        <div class="option ${ans === i ? 'selected' : ''}" onclick="selectMC(${i})">
+          <div class="dot"></div>
+          <div>${opt}</div>
+        </div>
+      `).join('')}
+    </div>`;
+  } else {
+    inputHtml = `
+      <div class="fill-wrap">
+        <label>請輸入羅馬拼音（不需區分大小寫）：</label>
+        <input type="text" class="fill-input" placeholder="例如: Tadasana" value="${ans || ''}" oninput="typeFill(this.value)">
+        <div class="fill-hint">提示：拼音之間可留空格，如 adho mukha svanasana</div>
+      </div>
+    `;
+  }
+
+  return `
+    ${renderHeader()}
+    <div class="card">
+      <div class="mala">${beads}</div>
+      <div class="progress-label">第 ${state.current + 1} / ${total} 題</div>
+      
+      <div class="q-meta">
+        <span class="q-cat">${CATEGORY_LABEL[q.cat] || '綜合'}</span>
+        <span class="q-num">${q.type==='mc' ? '單選題' : '拼音填空題'}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+
+      ${inputHtml}
+
+      <div class="nav-row">
+        <button class="btn secondary" onclick="goPrev()" ${state.current===0?'disabled':''}>上一題</button>
+        <button class="btn" onclick="goNext()">${state.current===total-1 ? '完成交卷' : '下一題'}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderResult(){
+  let correctCount = 0;
+  const catStats = {};
+
+  state.questions.forEach((q, i) => {
+    const ok = isCorrect(q, state.answers[i]);
+    if(ok) correctCount++;
+
+    if(!catStats[q.cat]) catStats[q.cat] = { total:0, correct:0 };
+    catStats[q.cat].total++;
+    if(ok) catStats[q.cat].correct++;
+  });
+
+  const score = Math.round((correctCount / state.questions.length) * 100);
+  let verdict = '', verdictSub = '';
+  if(score >= 90){
+    verdict = ' Namaste！你是 Ashish 老師嗎？';
+    verdictSub = '恭喜！您對瑜伽哲學與體位法梵文有極深刻的理解，絕對能在考試中取得優異成績！';
+  } else if(score >= 70){
+    verdict = ' 相當優秀！持續穩健練習';
+    verdictSub = '您已經掌握了大部份的瑜伽哲學概念，稍微複習弱點章節就能更加完美。';
+  } else {
+    verdict = ' Abhyasa！持續練習與精進';
+    verdictSub = '瑜伽哲學是深厚的學問，可以多閱讀幾次講義，並多瀏覽下方錯題解析來補強記憶喔。';
+  }
+
+  const reviewHtml = state.questions.map((q, i) => {
+    const userAns = state.answers[i];
+    const ok = isCorrect(q, userAns);
+
+    let yourAnsText = '', correctAnsText = '';
+    if(q.type === 'mc'){
+      yourAnsText = userAns !== null ? q.opts[userAns] : '未作答';
+      correctAnsText = q.opts[q.a];
     } else {
-        imgEl.style.display = 'none';
+      yourAnsText = userAns || '未作答';
+      correctAnsText = q.a.join(' / ');
     }
 
-    let optsContainer = document.getElementById('options-container');
-    let inputEl = document.getElementById('short-answer-input');
-    optsContainer.innerHTML = '';
+    return `
+      <div class="review-item">
+        <div class="review-head">
+          <div class="review-mark ${ok?'correct':'wrong'}">${ok?'✓':'✕'}</div>
+          <div>
+            <div style="font-size:11.5px; color:var(--primary); font-weight:700;">[${CATEGORY_LABEL[q.cat]}] 第 ${i+1} 題</div>
+            <div class="review-q">${q.q}</div>
+          </div>
+        </div>
+        <div class="review-body">
+          ${!ok ? `<div class="review-line your-wrong"><span class="tag">您的回答：</span><span class="val">${yourAnsText}</span></div>` : ''}
+          <div class="review-line correct-ans"><span class="tag">正確答案：</span><span class="val">${correctAnsText}</span></div>
+          <div class="review-explain"><b>解析：</b>${q.ex}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
 
-    if (q.type === 'single') {
-        inputEl.style.display = 'none';
-        optsContainer.style.display = 'block';
-        q.options.forEach((opt, i) => {
-            let letter = String.fromCharCode(65 + i);
-            let btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerText = `${letter}. ${opt}`;
-            btn.onclick = () => {
-                document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-                btn.classList.add('selected');
-                userAnswers[currentIndex] = letter;
-            };
-            optsContainer.appendChild(btn);
-        });
-    } else {
-        optsContainer.style.display = 'none';
-        inputEl.style.display = 'block';
-        inputEl.value = '';
-        inputEl.oninput = (e) => { userAnswers[currentIndex] = e.target.value; };
-    }
+  return `
+    ${renderHeader()}
+    <div class="card">
+      <div class="score-hero">
+        <div class="score-ring" style="--pct:${score}">
+          <div class="val">${score}<small>分</small></div>
+        </div>
+        <div class="verdict">${verdict}</div>
+        <div class="verdict-sub">${verdictSub}</div>
+      </div>
+
+      <div style="margin:24px 0 16px;">
+        <h3 style="font-size:16px; margin-bottom:12px;">各章節分析</h3>
+        ${Object.keys(catStats).map(cat => {
+          const s = catStats[cat];
+          const pct = Math.round((s.correct / s.total) * 100);
+          return `
+            <div class="analysis-row">
+              <div class="a-label">${CATEGORY_LABEL[cat]}</div>
+              <div class="a-bar"><div class="a-fill" style="width:${pct}%"></div></div>
+              <div class="a-pct">${pct}%</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+
+      <button class="btn" onclick="restart()">重新測驗</button>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:18px; margin-bottom:16px;">測驗檢討與解析</h3>
+      ${reviewHtml}
+    </div>
+  `;
 }
 
-function nextQuestion() {
-    if (!userAnswers[currentIndex]) {
-        alert("請先回答或填寫選項喔！");
-        return;
-    }
-    currentIndex++;
-    if (currentIndex < currentQuiz.length) {
-        renderQuestion();
-    } else {
-        calculateResult();
-    }
+function renderBankModal(){
+  if(!state.showBankModal) return '';
+
+  const mcItems = MC_BANK.map((q, i) => `
+    <div class="bank-item">
+      <div class="bank-q">${i+1}. [${CATEGORY_LABEL[q.cat]}] ${q.q}</div>
+      <div class="bank-ans">正解：${q.opts[q.a]}</div>
+      <div class="bank-ex">${q.ex}</div>
+    </div>
+  `).join('');
+
+  const fillItems = FILL_BANK.map((q, i) => `
+    <div class="bank-item">
+      <div class="bank-q">${i+1}. [體位法拼音] ${q.q}</div>
+      <div class="bank-ans">正解：${q.a.join(' / ')}</div>
+      <div class="bank-ex">${q.ex}</div>
+    </div>
+  `).join('');
+
+  return `
+    <div class="modal-overlay" onclick="toggleBankModal(false)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h2>完整題庫總覽</h2>
+          <button class="modal-close" onclick="toggleBankModal(false)">✕</button>
+        </div>
+        <div class="modal-body">
+          <h3 style="color:var(--primary); margin-bottom:10px;">單選題庫 (${MC_BANK.length} 題)</h3>
+          ${mcItems}
+          <h3 style="color:var(--primary); margin:20px 0 10px;">體位法簡答題庫 (${FILL_BANK.length} 題)</h3>
+          ${fillItems}
+        </div>
+      </div>
+    </div>
+  `;
 }
 
-function calculateResult() {
-    let score = 0;
-    let categoryStats = {};
+function render(){
+  const app = document.getElementById('app');
+  let content = '';
 
-    currentQuiz.forEach((q, i) => {
-        if (!categoryStats[q.category]) categoryStats[q.category] = { correct: 0, total: 0 };
-        categoryStats[q.category].total++;
+  if(state.screen === 'intro') content = renderIntro();
+  else if(state.screen === 'quiz') content = renderQuiz();
+  else if(state.screen === 'result') content = renderResult();
 
-        let isCorrect = false;
-        if (q.type === 'single') {
-            isCorrect = userAnswers[i] === q.answer;
-        } else {
-            // 簡答題關鍵字包含匹配
-            isCorrect = userAnswers[i] && q.answer.split('、').every(k => userAnswers[i].includes(k.trim()));
-        }
-
-        if (isCorrect) {
-            score += (100 / currentQuiz.length);
-            categoryStats[q.category].correct++;
-        }
-    });
-
-    // 顯示分數
-    document.getElementById('score-text').innerText = `${Math.round(score)} 分`;
-
-    // 強弱項標籤
-    let tagsContainer = document.getElementById('analysis-tags');
-    tagsContainer.innerHTML = '';
-    for (let cat in categoryStats) {
-        let rate = categoryStats[cat].correct / categoryStats[cat].total;
-        let tag = document.createElement('span');
-        tag.className = `tag ${rate >= 0.6 ? 'tag-strong' : 'tag-weak'}`;
-        tag.innerText = `${cat} (${Math.round(rate * 100)}%)`;
-        tagsContainer.appendChild(tag);
-    }
-
-    // 解析總覽
-    let reviewContainer = document.getElementById('review-container');
-    reviewContainer.innerHTML = '';
-    currentQuiz.forEach((q, i) => {
-        let div = document.createElement('div');
-        div.className = 'analysis-item';
-        div.innerHTML = `
-            <strong>Q${i+1}. [${q.category}] ${q.question}</strong><br>
-            你的回答：<span style="color:${userAnswers[i] === q.answer ? 'green':'red'}">${userAnswers[i] || '未答'}</span> | 
-            正確答案：<b>${q.answer}</b><br>
-            <small style="color:#555;">💡 解析：${q.explanation}</small>
-        `;
-        reviewContainer.appendChild(div);
-    });
-
-    showCard('result-card');
+  app.innerHTML = content + renderBankModal() + `<footer class="note">Made by 8ana for 2026 Yoga Teacher Training · Philosophy Practice</footer>`;
 }
 
-function toggleTypeEdit() {
-    let type = document.getElementById('edit-type').value;
-    document.getElementById('edit-options-group').style.display = type === 'single' ? 'block' : 'none';
-}
-
-function saveQuestion() {
-    let cat = document.getElementById('edit-cat').value;
-    let type = document.getElementById('edit-type').value;
-    let qText = document.getElementById('edit-q').value;
-    let img = document.getElementById('edit-img').value;
-    let ans = document.getElementById('edit-ans').value;
-    let exp = document.getElementById('edit-exp').value;
-
-    if (!qText || !ans) { alert("請填寫題目與答案！"); return; }
-
-    let opts = [];
-    if (type === 'single') {
-        document.querySelectorAll('.edit-opt').forEach(input => {
-            if (input.value) opts.push(input.value);
-        });
-    }
-
-    let newQ = {
-        id: Date.now(),
-        category: cat,
-        type: type,
-        question: qText,
-        img: img,
-        options: opts,
-        answer: ans.toUpperCase(),
-        explanation: exp
-    };
-
-    questionBank.push(newQ);
-    localStorage.setItem('yoga_quiz_db', JSON.stringify(questionBank));
-    alert("題目新增成功！");
-    showHome();
-}
+// 首次啟動繪製畫面
+render();
 </script>
 </body>
 </html>
