@@ -214,6 +214,41 @@
   .bank-ans{ font-size:13px; color:var(--success); font-weight:700; margin-bottom:4px;}
   .bank-ex{ font-size:12.5px; color:var(--ink-soft); background:var(--bg-alt); padding:8px 12px; border-radius:10px; margin-top:6px; line-height:1.5;}
 
+  /* ---------- 體位法發音彈窗 ---------- */
+  .now-playing-bar{ font-size:13px; font-weight:700; color:var(--primary); margin-bottom:8px; min-height:18px;}
+  .asana-player-wrap{ margin-bottom:14px; }
+  .asana-player-wrap audio{ width:100%; }
+  .asana-quick-btns{ display:flex; gap:8px; margin-bottom:20px; }
+  .asana-quick-btns .btn{ font-size:13px; padding:11px 14px; }
+
+  .audio-group-title{ font-size:13px; font-weight:700; color:var(--primary); margin:18px 0 8px; display:flex; align-items:center; gap:6px;}
+  .asana-list{ display:flex; flex-direction:column; gap:8px; }
+  .asana-row{
+    display:flex; align-items:center; gap:10px; padding:10px 12px;
+    background:var(--bg-alt); border-radius:12px; cursor:pointer;
+    border:1px solid transparent; transition: all .15s ease;
+  }
+  .asana-row:active{ transform:scale(0.98); }
+  .asana-row.active{ background:linear-gradient(135deg, rgba(255,112,67,0.18), rgba(255,179,0,0.14)); border-color:var(--primary-light); }
+  .asana-row.disabled{ opacity:.5; cursor:not-allowed; }
+  .asana-row .no{ color:var(--ink-soft); font-weight:700; font-size:12px; width:22px; flex:0 0 auto; }
+  .asana-row .names{ flex:1; min-width:0; }
+  .asana-row .sk{ font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--primary); font-weight:700; font-size:15px; line-height:1.3; }
+  .asana-row .cn{ color:var(--ink-soft); font-size:12px; margin-top:2px; }
+  .asana-row .play-ico{ color:var(--primary); font-size:12px; flex:0 0 auto; }
+  .asana-row .mark-badge{
+    display:none; font-size:11px; font-weight:700; color:#fff; background:var(--primary);
+    padding:2px 8px; border-radius:99px; flex:0 0 auto;
+  }
+  .asana-note{ font-size:12.5px; color:var(--ink-soft); background:var(--bg-alt); padding:10px 12px; border-radius:10px; margin-top:14px; line-height:1.6; text-align:center;}
+
+  .mark-tool{ margin-top:22px; padding-top:16px; border-top:1px dashed var(--line); }
+  .mark-tool p{ font-size:12px; color:var(--ink-soft); line-height:1.6; }
+  .mark-tool textarea{
+    width:100%; min-height:130px; font-family:'SFMono-Regular',Consolas,monospace; font-size:11px;
+    padding:10px; border-radius:10px; border:1px solid var(--line); background:var(--bg); margin-top:10px; resize:vertical;
+  }
+
   footer.note{ text-align:center; color:var(--ink-soft); font-size:11.5px; margin-top:24px; line-height:1.7;}
 
   @media (max-width:380px){
@@ -408,11 +443,71 @@ const FILL_BANK = [
 {q:'腹部扭轉式（Belly Twist Pose）的梵文羅馬拼音為？', a:['jathara parivartanasana'], ex:'Jathara Parivartanasana：腹部扭轉式，仰臥的脊椎扭轉體位法。'},
 ];
 
+/* 體位法發音清單 —— 對應講義編號 1~50
+   file：所屬錄音檔路徑（null 表示尚未收錄）
+   start：該體位法發音在錄音中的起始秒數（目前為 0，需要實際聽打後填入，見下方「時間點標記工具」）
+   duration：從 start 開始播放幾秒後自動停止（0 表示不自動停止，持續播放）*/
+const AUDIO_FILE_1 = 'audio/asana_1-20.mp3';
+const AUDIO_FILE_2 = 'audio/asana_21-49.mp3';
+
+const ASANA_LIST = [
+  {no:1, sk:'Padahastasana', cn:'手碰腳式', file:AUDIO_FILE_1, start:8, duration:4},
+  {no:2, sk:'Utkatasana', cn:'幻椅式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:3, sk:'Utthita Ashwa Sanchalanasana', cn:'高弓步式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:4, sk:'Virabhadrasana 1', cn:'戰士一式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:5, sk:'Virabhadrasana 2', cn:'戰士二式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:6, sk:'Virabhadrasana 3', cn:'戰士三式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:7, sk:'Adho Mukha Svanasana', cn:'下犬式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:8, sk:'Phalakasana', cn:'平板式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:9, sk:'Chaturanga Dandasana', cn:'鱷魚式／四柱支撐', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:10, sk:'Ashtanga Namaskara', cn:'八支點地式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:11, sk:'Bhujangasana', cn:'眼鏡蛇式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:12, sk:'Urdhvamukha Svanasana', cn:'上犬式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:13, sk:'Vrikshasana', cn:'樹式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:14, sk:'Utthita Hasta Padangusthasana', cn:'站立手抓腳趾式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:15, sk:'Natarajasana', cn:'舞王式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:16, sk:'Garudasana', cn:'鷹式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:17, sk:'Parsvottanasana', cn:'金字塔式／側伸展式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:18, sk:'Trikonasana', cn:'三角式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:19, sk:'Parivrtta Trikonasana', cn:'扭轉三角式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:20, sk:'Prasarita Padottanasana', cn:'寬腳分開站立前彎式／雙角式', file:AUDIO_FILE_1, start:0, duration:0},
+  {no:21, sk:'Utthita Parsvakonasana', cn:'側角伸展式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:22, sk:'Parivrtta Parsvakonasana', cn:'扭轉側角式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:23, sk:'Supta Virasana', cn:'臥英雄式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:24, sk:'Bakasana', cn:'烏鴉式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:25, sk:'Vasisthasana', cn:'側平板式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:26, sk:'Hanumanasana', cn:'神猴哈奴曼式／劈腿式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:27, sk:'Dandasana', cn:'杖式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:28, sk:'Gomukhasana', cn:'牛面式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:29, sk:'Eka Pada Rajakapotasana', cn:'單腿鴿王式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:30, sk:'Ushtrasana', cn:'駱駝式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:31, sk:'Sashankasana', cn:'兔子式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:32, sk:'Parighasana', cn:'門栓式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:33, sk:'Janu Sirsasana', cn:'單腿頭枕膝前屈式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:34, sk:'Paschimottanasana', cn:'坐姿前彎式／西方伸展式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:35, sk:'Purvottanasana', cn:'反向支架式／前部伸展式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:36, sk:'Naukasana', cn:'船式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:37, sk:'Ardha Matsyendrasana', cn:'半脊柱扭轉式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:38, sk:'Matsyasana', cn:'魚式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:39, sk:'Dhanurasana', cn:'弓式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:40, sk:'Salabhasana', cn:'蝗蟲式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:41, sk:'Halasana', cn:'犁鋤式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:42, sk:'Sarvangasana', cn:'肩倒立式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:43, sk:'Setu Bandhasana', cn:'橋式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:44, sk:'Chakrasana', cn:'輪式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:45, sk:'Sirsasana', cn:'頭倒立式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:46, sk:'Balasana', cn:'嬰兒式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:47, sk:'Pincha Mayurasana', cn:'孔雀起舞式／肘倒立', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:48, sk:'Jathara Parivartanasana', cn:'腹部扭轉式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:49, sk:'Savasana／Shavasana', cn:'大休息／攤屍式', file:AUDIO_FILE_2, start:0, duration:0},
+  {no:50, sk:'Tadasana', cn:'山式', file:null, start:0, duration:0},
+];
+
 /* ============================================================
    應用程式邏輯
    ============================================================ */
 const TOTAL_MC = 17, TOTAL_FILL = 3;
-let state = { screen:'intro', questions:[], current:0, answers:[], showBankModal: false };
+let state = { screen:'intro', questions:[], current:0, answers:[], showBankModal: false, showAsanaModal: false };
 
 function shuffle(arr){
   const a=[...arr];
@@ -451,6 +546,11 @@ function restart(){ state.screen='intro'; render(); }
 
 function toggleBankModal(show){
   state.showBankModal = show;
+  render();
+}
+
+function toggleAsanaModal(show){
+  state.showAsanaModal = show;
   render();
 }
 
@@ -498,6 +598,7 @@ function renderIntro(){
       <div style="margin-top:24px; display:flex; flex-direction:column; gap:10px;">
         <button class="btn" onclick="buildQuiz()">開始隨機模擬考</button>
         <button class="btn secondary" onclick="toggleBankModal(true)">瀏覽完整題庫 (${MC_BANK.length + FILL_BANK.length} 題)</button>
+        <button class="btn secondary" onclick="toggleAsanaModal(true)">🔊 體位法發音練習 (${ASANA_LIST.length} 式)</button>
       </div>
     </div>
   `;
@@ -687,6 +788,171 @@ function renderBankModal(){
   `;
 }
 
+/* ---- 體位法發音播放邏輯 ----
+   注意：以下播放／標記相關函式一律「不」呼叫 render()，
+   因為 render() 會整頁重繪、把 <audio> 元素砍掉重建，導致播放中斷。 */
+let asanaMarks = {};   // { [no]: 秒數 }，暫存本次標記結果（重新整理頁面後會清空）
+let markMode = false;
+
+function renderAsanaRow(item){
+  const disabled = !item.file;
+  return `
+    <div class="asana-row ${disabled ? 'disabled' : ''}" data-no="${item.no}"
+      ${disabled ? '' : `onclick="handleAsanaClick(${item.no})"`}>
+      <div class="no">${item.no}</div>
+      <div class="names">
+        <div class="sk">${item.sk}</div>
+        <div class="cn">${item.cn}${disabled ? '（尚無錄音）' : ''}</div>
+      </div>
+      <span class="mark-badge">--:--</span>
+      ${disabled ? '' : '<span class="play-ico">▶</span>'}
+    </div>
+  `;
+}
+
+function renderAsanaModal(){
+  if(!state.showAsanaModal) return '';
+
+  const group1 = ASANA_LIST.filter(a => a.file === AUDIO_FILE_1);
+  const group2 = ASANA_LIST.filter(a => a.file === AUDIO_FILE_2);
+  const noAudio = ASANA_LIST.filter(a => a.file === null);
+
+  return `
+    <div class="modal-overlay" onclick="toggleAsanaModal(false)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h2>體位法發音練習</h2>
+          <button class="modal-close" onclick="toggleAsanaModal(false)">✕</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:12.5px; color:var(--ink-soft); margin-bottom:14px; line-height:1.6;">
+            點選下方任一體位法，會自動跳到該體位法在錄音中的位置並播放。老師的錄音是兩段連續講解，因此第一次點擊某個體位法前，請先確認已載入正確的錄音檔（點一下清單項目會自動切換）。
+          </p>
+
+          <div class="asana-player-wrap">
+            <div class="now-playing-bar" id="nowPlayingLabel">🎵 尚未播放</div>
+            <audio id="asanaPlayer" controls preload="none"></audio>
+          </div>
+          <div class="asana-quick-btns">
+            <button class="btn secondary" onclick="playAsanaFull(1)">▶ 從頭播放錄音一</button>
+            <button class="btn secondary" onclick="playAsanaFull(2)">▶ 從頭播放錄音二</button>
+          </div>
+
+          <div class="audio-group-title">🎧 錄音一：第 1～20 式</div>
+          <div class="asana-list">
+            ${group1.map(renderAsanaRow).join('')}
+          </div>
+
+          <div class="audio-group-title">🎧 錄音二：第 21～49 式</div>
+          <div class="asana-list">
+            ${group2.map(renderAsanaRow).join('')}
+          </div>
+
+          ${noAudio.length ? `
+            <div class="asana-note">
+              ⚠️ 第 ${noAudio.map(a=>a.no).join('、')} 式（${noAudio.map(a=>a.sk+' '+a.cn).join('、')}）尚未收錄於錄音中。
+            </div>
+          ` : ''}
+
+          <div class="mark-tool">
+            <button class="btn small secondary" id="markModeBtn" onclick="toggleMarkMode()">🛠️ 開啟時間點標記工具（給老師／管理員使用）</button>
+            <div id="markOutputPanel" style="display:none; margin-top:12px;">
+              <p>
+                標記步驟：① 點「從頭播放錄音一」開始播放 ② 錄音播到某個體位法名稱時，點清單中對應的項目「標記」目前秒數（不會中斷播放）③ 錄音二重複同樣步驟 ④ 全部標記完後按下方按鈕產生程式碼，複製貼回 <code>ASANA_LIST</code> 即可完成點擊跳轉功能。
+              </p>
+              <button class="btn small" onclick="generateTimestampCode()">產生 ASANA_LIST 程式碼</button>
+              <textarea id="markOutputCode" placeholder="按上方按鈕後，這裡會出現可複製貼上的程式碼..." readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function formatTime(sec){
+  sec = Math.max(0, Math.floor(sec));
+  const m = Math.floor(sec/60), s = sec%60;
+  return m + ':' + String(s).padStart(2,'0');
+}
+
+function updateNowPlayingLabel(text){
+  const el = document.getElementById('nowPlayingLabel');
+  if(el) el.textContent = '🎵 正在播放：' + text;
+}
+
+function setActiveRow(no){
+  document.querySelectorAll('.asana-row').forEach(r=>r.classList.remove('active'));
+  const row = document.querySelector(`.asana-row[data-no="${no}"]`);
+  if(row) row.classList.add('active');
+}
+
+function playAsanaFull(fileNum){
+  const file = fileNum === 1 ? AUDIO_FILE_1 : AUDIO_FILE_2;
+  const player = document.getElementById('asanaPlayer');
+  if(!player) return;
+  if(!player.src.endsWith(file)) player.src = file;
+  player.currentTime = 0;
+  player.play();
+  updateNowPlayingLabel(fileNum === 1 ? '錄音一（從頭播放）' : '錄音二（從頭播放）');
+  document.querySelectorAll('.asana-row').forEach(r=>r.classList.remove('active'));
+}
+
+function handleAsanaClick(no){
+  const item = ASANA_LIST.find(a => a.no === no);
+  if(!item || !item.file) return;
+  const player = document.getElementById('asanaPlayer');
+  if(!player) return;
+
+  if(markMode){
+    // 標記模式：只記錄目前播放進度，不會跳轉／中斷播放
+    if(!player.src.endsWith(item.file)){
+      alert('請先播放「' + (item.file === AUDIO_FILE_1 ? '錄音一' : '錄音二') + '」，再於播放過程中點選體位法進行標記。');
+      return;
+    }
+    asanaMarks[no] = Math.round(player.currentTime * 10) / 10;
+    const badge = document.querySelector(`.asana-row[data-no="${no}"] .mark-badge`);
+    if(badge) badge.textContent = formatTime(asanaMarks[no]);
+    return;
+  }
+
+  // 一般模式：跳轉到該體位法的時間點並播放
+  if(!player.src.endsWith(item.file)) player.src = item.file;
+  player.currentTime = item.start || 0;
+  player.play();
+  updateNowPlayingLabel(item.sk + '（' + item.cn + '）');
+  setActiveRow(no);
+
+  clearTimeout(player._stopTimer);
+  if(item.duration && item.duration > 0){
+    player._stopTimer = setTimeout(()=>{ player.pause(); }, item.duration * 1000);
+  }
+}
+
+function toggleMarkMode(){
+  markMode = !markMode;
+  const btn = document.getElementById('markModeBtn');
+  const panel = document.getElementById('markOutputPanel');
+  if(btn) btn.textContent = markMode
+    ? '✅ 標記模式：開啟中（點體位法＝標記時間；再按一次結束）'
+    : '🛠️ 開啟時間點標記工具（給老師／管理員使用）';
+  if(panel) panel.style.display = markMode ? 'block' : 'none';
+  document.querySelectorAll('.mark-badge').forEach(b => {
+    b.style.display = markMode ? 'inline-block' : 'none';
+  });
+}
+
+function generateTimestampCode(){
+  const lines = ASANA_LIST.map(item=>{
+    const start = asanaMarks[item.no] !== undefined ? asanaMarks[item.no] : (item.start || 0);
+    const fileVar = item.file === AUDIO_FILE_1 ? 'AUDIO_FILE_1' : (item.file === AUDIO_FILE_2 ? 'AUDIO_FILE_2' : 'null');
+    return `  {no:${item.no}, sk:'${item.sk}', cn:'${item.cn}', file:${fileVar}, start:${start}, duration:0},`;
+  });
+  const code = 'const ASANA_LIST = [\n' + lines.join('\n') + '\n];';
+  const out = document.getElementById('markOutputCode');
+  if(out) out.value = code;
+}
+
 function render(){
   const app = document.getElementById('app');
   let content = '';
@@ -695,7 +961,7 @@ function render(){
   else if(state.screen === 'quiz') content = renderQuiz();
   else if(state.screen === 'result') content = renderResult();
 
-  app.innerHTML = content + renderBankModal() + `<footer class="note">Made by 8ana for 2026 Yoga Teacher Training · Philosophy Practice</footer>`;
+  app.innerHTML = content + renderBankModal() + renderAsanaModal() + `<footer class="note">Made by 8ana for 2026 Yoga Teacher Training · Philosophy Practice</footer>`;
 }
 
 // 首次啟動繪製畫面
