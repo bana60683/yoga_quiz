@@ -454,7 +454,7 @@ const ASANA_LIST = [
   {no:1, sk:'Padahastasana', cn:'手碰腳式', file:AUDIO_FILE_1, start:9, duration:3},
   {no:2, sk:'Utkatasana', cn:'幻椅式', file:AUDIO_FILE_1, start:14, duration:2},
   {no:3, sk:'Utthita Ashwa Sanchalanasana', cn:'高弓步式', file:AUDIO_FILE_1, start:17, duration:4},
-  {no:4, sk:'Virabhadrasana 1', cn:'戰士一式', file:AUDIO_FILE_1, start:23, duration:3},
+  {no:4, sk:'Virabhadrasana 1', cn:'戰士一式', file:AUDIO_FILE_1, start:23, duration:2},
   {no:5, sk:'Virabhadrasana 2', cn:'戰士二式', file:AUDIO_FILE_1, start:27, duration:2},
   {no:6, sk:'Virabhadrasana 3', cn:'戰士三式', file:AUDIO_FILE_1, start:30, duration:3},
   {no:7, sk:'Adho Mukha Svanasana', cn:'下犬式', file:AUDIO_FILE_1, start:34, duration:3},
@@ -462,15 +462,15 @@ const ASANA_LIST = [
   {no:9, sk:'Chaturanga Dandasana', cn:'鱷魚式／四柱支撐', file:AUDIO_FILE_1, start:41, duration:3},
   {no:10, sk:'Ashtanga Namaskara', cn:'八支點地式', file:AUDIO_FILE_1, start:45, duration:3},
   {no:11, sk:'Bhujangasana', cn:'眼鏡蛇式', file:AUDIO_FILE_1, start:49, duration:2},
-  {no:12, sk:'Urdhvamukha Svanasana', cn:'上犬式', file:AUDIO_FILE_1, start:53, duration:3},
+  {no:12, sk:'Urdhvamukha Svanasana', cn:'上犬式', file:AUDIO_FILE_1, start:53, duration:2},
   {no:13, sk:'Vrikshasana', cn:'樹式', file:AUDIO_FILE_1, start:56, duration:2},
-  {no:14, sk:'Utthita Hasta Padangusthasana', cn:'站立手抓腳趾式', file:AUDIO_FILE_1, start:59, duration:4},
-  {no:15, sk:'Natarajasana', cn:'舞王式', file:AUDIO_FILE_1, start:64, duration:2},
-  {no:16, sk:'Garudasana', cn:'鷹式', file:AUDIO_FILE_1, start:68, duration:1},
-  {no:17, sk:'Parsvottanasana', cn:'金字塔式／側伸展式', file:AUDIO_FILE_1, start:70, duration:3},
-  {no:18, sk:'Trikonasana', cn:'三角式', file:AUDIO_FILE_1, start:74, duration:2},
+  {no:14, sk:'Utthita Hasta Padangusthasana', cn:'站立手抓腳趾式', file:AUDIO_FILE_1, start:59, duration:5},
+  {no:15, sk:'Natarajasana', cn:'舞王式', file:AUDIO_FILE_1, start:65, duration:3},
+  {no:16, sk:'Garudasana', cn:'鷹式', file:AUDIO_FILE_1, start:68, duration:2},
+  {no:17, sk:'Parsvottanasana', cn:'金字塔式／側伸展式', file:AUDIO_FILE_1, start:71, duration:3},
+  {no:18, sk:'Trikonasana', cn:'三角式', file:AUDIO_FILE_1, start:75, duration:2},
   {no:19, sk:'Parivrtta Trikonasana', cn:'扭轉三角式', file:AUDIO_FILE_1, start:78, duration:3},
-  {no:20, sk:'Prasarita Padottanasana', cn:'寬腳分開站立前彎式／雙角式', file:AUDIO_FILE_1, start:82, duration:3},
+  {no:20, sk:'Prasarita Padottanasana', cn:'寬腳分開站立前彎式／雙角式', file:AUDIO_FILE_1, start:82, duration:4},
   {no:21, sk:'Utthita Parsvakonasana', cn:'側角伸展式', file:AUDIO_FILE_2, start:4, duration:2},
   {no:22, sk:'Parivrtta Parsvakonasana', cn:'扭轉側角式', file:AUDIO_FILE_2, start:8, duration:2},
   {no:23, sk:'Supta Virasana', cn:'臥英雄式', file:AUDIO_FILE_2, start:12, duration:2},
@@ -854,15 +854,8 @@ function renderAsanaModal(){
             </div>
           ` : ''}
 
-          <div class="mark-tool">
-            <button class="btn small secondary" id="markModeBtn" onclick="toggleMarkMode()">🛠️ 開啟時間點標記工具（給老師／管理員使用）</button>
-            <div id="markOutputPanel" style="display:none; margin-top:12px;">
-              <p>
-                標記步驟：① 點「從頭播放錄音一」開始播放 ② 錄音播到某個體位法名稱時，點清單中對應的項目「標記」目前秒數（不會中斷播放）③ 錄音二重複同樣步驟 ④ 全部標記完後按下方按鈕產生程式碼，複製貼回 <code>ASANA_LIST</code> 即可完成點擊跳轉功能。
-              </p>
-              <button class="btn small" onclick="generateTimestampCode()">產生 ASANA_LIST 程式碼</button>
-              <textarea id="markOutputCode" placeholder="按上方按鈕後，這裡會出現可複製貼上的程式碼..." readonly></textarea>
-            </div>
+         
+            
           </div>
         </div>
       </div>
