@@ -887,7 +887,7 @@ function playAsanaFull(fileNum){
   if(!player.src.endsWith(file)) player.src = file;
   player.currentTime = 0;
   player.play();
-  updateNowPlayingLabel(fileNum === 1 ? '錄音一（從頭播放）' : '錄音二（從頭播放）');
+  updateNowPlayingLabel(fileNum === 1 ? '錄音一(No.1~20)' : '錄音二(No.21~49)');
   document.querySelectorAll('.asana-row').forEach(r=>r.classList.remove('active'));
 }
 
