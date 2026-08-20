@@ -122,6 +122,13 @@
   .option.selected{ background:#FFF3E9; border-color:var(--primary); }
   .option.selected .dot{ background:var(--primary); border-color:var(--primary); }
 
+  /* 遊戲專用選項樣式 */
+  .option.game-correct{ background:var(--success-bg) !important; border-color:var(--success) !important; color:var(--success) !important; font-weight:700; }
+  .option.game-correct .dot{ background:var(--success) !important; border-color:var(--success) !important; }
+  .option.game-wrong{ background:var(--error-bg) !important; border-color:var(--error) !important; color:var(--error) !important; }
+  .option.game-wrong .dot{ background:var(--error) !important; border-color:var(--error) !important; }
+  .option.game-disabled{ pointer-events:none; }
+
   .fill-wrap{ margin-bottom:6px; }
   .fill-wrap label{ font-size:13px; color:var(--ink-soft); display:block; margin-bottom:8px;}
   .fill-input{
@@ -249,6 +256,23 @@
     padding:10px; border-radius:10px; border:1px solid var(--line); background:var(--bg); margin-top:10px; resize:vertical;
   }
 
+  /* ---------- 字根拆解與小遊戲專用元件 ---------- */
+  .breakdown-box{
+    background:#FFF3E9; border:1.5px dashed var(--primary-light);
+    border-radius:16px; padding:14px 16px; margin-top:16px;
+    animation: fadeIn .25s ease;
+  }
+  .breakdown-title{ font-size:13px; font-weight:700; color:var(--primary); margin-bottom:8px; display:flex; align-items:center; gap:6px;}
+  .breakdown-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px;}
+  .root-tag{
+    background:#fff; border:1px solid var(--line); border-radius:8px;
+    padding:4px 8px; font-size:12px; color:var(--ink);
+  }
+  .root-tag b{ color:var(--primary); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; margin-right:4px;}
+  .breakdown-desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin-top:6px;}
+
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
   footer.note{ text-align:center; color:var(--ink-soft); font-size:11.5px; margin-top:24px; line-height:1.7;}
 
   @media (max-width:380px){
@@ -286,7 +310,7 @@ const MC_BANK = [
 {cat:'sankhya', q:'惰性（Tamas）主要對應的是？', opts:['五感受與五大元素','五感覺器官','心智 Manas','自我 Ahankara'], a:0, ex:'惰性（Tamas）分化出五感受／感覺，以及空、風、火、水、土五大元素。'},
 {cat:'sankhya', q:'變性（Rajas）的特性為何？', opts:['產生具體的感官器官','不產生實體，提供能量與驅動力','是純粹意識','是物質根本'], a:1, ex:'變性（Rajas）本身不產生實體，而是提供悅性與惰性演化所需的能量與驅動力。'},
 {cat:'sankhya', q:'人生的五大煩惱（Kleshas）有無知、有我、執著、排斥與？', opts:['死懼','貪婪','憤怒','幻想'], a:0, ex:'五煩惱（Kleshas）為：無知、有我、執著、死懼、排斥。'},
-{cat:'sankhya', q:'六大正統哲學派別中，著重實踐並以《瑜伽經》為核心的是？', opts:['Nyaya（正理論）','Yoga（瑜伽）','Vedanta（吠壇多）','Mimansa（彌曼差）'], a:1, ex:'Yoga 派由 Patanjali 創立，著重實踐端與《瑜伽經》。'},
+{cat:'sankhya', q:'六大正統哲學派別中，著重實踐並以《瑜伽經》為核心的是？', opts:['Nyaya（正理論）','Yoga（瑜伽）','Vedanta（吠壇多）','Mimansa（彌曼差）'], a:1, ex:'Yoga 派由 Patanjali 創立，著重實踐端與《瑜伽經。'},
 {cat:'sankhya', q:'「Darshan」的意思是什麼？', opts:['意識傾聽','熱愛','帶著覺知去看見','宇宙意識能量'], a:2, ex:'「Darshan」（中文常譯為「達顯」）源自梵文，字面意思是「看見」或「注視」，帶著覺知去看見，也常用來代指印度哲學。'},
 {cat:'sankhya', q:'以下何者屬於「非正統（Hetrodox）」印度哲學派別，即不依據《吠陀經》？', opts:['數論（Sankhya）','瑜伽（Yoga）','佛教(Buddha Dharma)','吠壇多（Vedanta）'], a:2, ex:'非正統派別不依《吠陀經》為本，包含佛教、耆那教與查瓦克（Charmwaka）。'},
 
@@ -503,11 +527,79 @@ const ASANA_LIST = [
   {no:50, sk:'Tadasana', cn:'山式', file:null, start:0, duration:0},
 ];
 
+/* 50 個體位法之字根拆解辭典 */
+const ASANA_ROOTS = {
+  1: { roots: [{k:'Pada', v:'腳'}, {k:'Hasta', v:'手'}, {k:'Asana', v:'體位法'}], desc:'手觸碰腳的站姿前彎體位法。' },
+  2: { roots: [{k:'Utkata', v:'強大/猛烈/椅子'}, {k:'Asana', v:'體位法'}], desc:'如坐無形之椅，鍛鍊下肢力量。' },
+  3: { roots: [{k:'Utthita', v:'伸展'}, {k:'Ashwa', v:'馬'}, {k:'Sanchalana', v:'跨步/奔馳'}, {k:'Asana', v:'體位法'}], desc:'高弓步伸展式，像戰馬奔馳之姿。' },
+  4: { roots: [{k:'Virabhadra', v:'勇士/戰士'}, {k:'1', v:'第一式'}, {k:'Asana', v:'體位法'}], desc:'濕婆化身英勇戰士，正面朝前開展。' },
+  5: { roots: [{k:'Virabhadra', v:'勇士/戰士'}, {k:'2', v:'第二式'}, {k:'Asana', v:'體位法'}], desc:'戰士二式，雙臂向兩側延展專注凝視。' },
+  6: { roots: [{k:'Virabhadra', v:'勇士/戰士'}, {k:'3', v:'第三式'}, {k:'Asana', v:'體位法'}], desc:'戰士三式，單腿站立平衡飛行之姿。' },
+  7: { roots: [{k:'Adho', v:'向下'}, {k:'Mukha', v:'臉/面'}, {k:'Svana', v:'狗'}, {k:'Asana', v:'體位法'}], desc:'如同小狗向下伸展全身。' },
+  8: { roots: [{k:'Phalaka', v:'木板/平板'}, {k:'Asana', v:'體位法'}], desc:'核心與手臂穩定如一塊木板。' },
+  9: { roots: [{k:'Chatur', v:'四'}, {k:'Anga', v:'肢體/部位'}, {k:'Danda', v:'木杖'}, {k:'Asana', v:'體位法'}], desc:'四肢著地的木杖支撐式。' },
+  10: { roots: [{k:'Ashta', v:'八'}, {k:'Anga', v:'支/點'}, {k:'Namaskara', v:'致敬/頂禮'}], desc:'雙腳、雙膝、雙手、胸、下巴八點著地。' },
+  11: { roots: [{k:'Bhujanga', v:'蛇/眼鏡蛇'}, {k:'Asana', v:'體位法'}], desc:'如眼鏡蛇昂首開展胸腔。' },
+  12: { roots: [{k:'Urdhva', v:'向上'}, {k:'Mukha', v:'臉/面'}, {k:'Svana', v:'狗'}, {k:'Asana', v:'體位法'}], desc:'面部向上昂首的上犬式。' },
+  13: { roots: [{k:'Vriksha', v:'樹木'}, {k:'Asana', v:'體位法'}], desc:'如大樹般向下扎根、向上挺立。' },
+  14: { roots: [{k:'Utthita', v:'伸展'}, {k:'Hasta', v:'手'}, {k:'Padangustha', v:'大腳趾'}, {k:'Asana', v:'體位法'}], desc:'站立手抓大腳趾伸展平衡式。' },
+  15: { roots: [{k:'Nata', v:'舞者'}, {k:'Raja', v:'國王/王者'}, {k:'Asana', v:'體位法'}], desc:'濕婆神宇宙之舞的舞王式。' },
+  16: { roots: [{k:'Garuda', v:'神鷹/大鵬金翅鳥'}, {k:'Asana', v:'體位法'}], desc:'雙手雙腿交纏如神鷹之姿。' },
+  17: { roots: [{k:'Parsva', v:'側邊'}, {k:'Uttana', v:'強烈伸展'}, {k:'Asana', v:'體位法'}], desc:'加強側身前彎與脊椎延伸。' },
+  18: { roots: [{k:'Tri', v:'三'}, {k:'Kona', v:'角'}, {k:'Asana', v:'體位法'}], desc:'經典三角形結構的站姿開展。' },
+  19: { roots: [{k:'Parivrtta', v:'扭轉/旋轉'}, {k:'Trikona', v:'三角'}, {k:'Asana', v:'體位法'}], desc:'三角式結合深層脊椎扭轉。' },
+  20: { roots: [{k:'Prasarita', v:'展開/分開'}, {k:'Pada', v:'腳'}, {k:'Uttana', v:'強烈伸展'}], desc:'雙腳大開的站姿前彎伸展式。' },
+  21: { roots: [{k:'Utthita', v:'伸展'}, {k:'Parsva', v:'側邊'}, {k:'Kona', v:'角'}, {k:'Asana', v:'體位法'}], desc:'側角伸展式，加強下肢與體側延展。' },
+  22: { roots: [{k:'Parivrtta', v:'扭轉'}, {k:'Parsva', v:'側邊'}, {k:'Kona', v:'角'}, {k:'Asana', v:'體位法'}], desc:'側角式結合胸腔與脊椎扭轉。' },
+  23: { roots: [{k:'Supta', v:'仰臥/躺下'}, {k:'Vira', v:'英雄'}, {k:'Asana', v:'體位法'}], desc:'英雄坐姿後仰臥放鬆大腿前側。' },
+  24: { roots: [{k:'Baka', v:'烏鴉/鶴'}, {k:'Asana', v:'體位法'}], desc:'經典手臂支撐平衡體位法。' },
+  25: { roots: [{k:'Vasistha', v:'伐樓尼仙人/最富裕'}, {k:'Asana', v:'體位法'}], desc:'以聖哲命名的側平板單手支撐式。' },
+  26: { roots: [{k:'Hanuman', v:'神猴哈奴曼'}, {k:'Asana', v:'體位法'}], desc:'紀念神猴哈奴曼忠誠大跨步的前後劈腿式。' },
+  27: { roots: [{k:'Danda', v:'木杖/手杖'}, {k:'Asana', v:'體位法'}], desc:'坐姿挺直如手杖的基礎起始式。' },
+  28: { roots: [{k:'Go', v:'牛'}, {k:'Mukha', v:'面/臉'}, {k:'Asana', v:'體位法'}], desc:'雙腿交疊如牛面、雙手互扣開肩。' },
+  29: { roots: [{k:'Eka', v:'一'}, {k:'Pada', v:'腿'}, {k:'Raja', v:'王'}, {k:'Kapota', v:'鴿子'}], desc:'單腿鴿王式，深層開髖與後彎。' },
+  30: { roots: [{k:'Ushtra', v:'駱駝'}, {k:'Asana', v:'體位法'}], desc:'跪姿胸腔大開展的深度後彎。' },
+  31: { roots: [{k:'Sashanka', v:'兔子/月亮'}, {k:'Asana', v:'體位法'}], desc:'放鬆背部與按摩頭頂的兔子式。' },
+  32: { roots: [{k:'Parigha', v:'門栓/鐵欄'}, {k:'Asana', v:'體位法'}], desc:'跪姿向側邊伸展如緊扣的門栓。' },
+  33: { roots: [{k:'Janu', v:'膝蓋'}, {k:'Sirsa', v:'頭'}, {k:'Asana', v:'體位法'}], desc:'單腿坐姿頭碰膝前彎伸展式。' },
+  34: { roots: [{k:'Paschima', v:'西方/後背'}, {k:'Uttana', v:'強烈伸展'}], desc:'伸展整個身體背部（西方）的坐姿前彎。' },
+  35: { roots: [{k:'Purva', v:'東方/前側'}, {k:'Uttana', v:'強烈伸展'}], desc:'伸展整個身體前側（東方）的反向支架。' },
+  36: { roots: [{k:'Nauka', v:'船/小舟'}, {k:'Asana', v:'體位法'}], desc:'核心平衡如小舟航行水面。' },
+  37: { roots: [{k:'Ardha', v:'半'}, {k:'Matsyendra', v:'魚王聖哲'}, {k:'Asana', v:'體位法'}], desc:'經典的半脊柱坐姿扭轉式。' },
+  38: { roots: [{k:'Matsya', v:'魚'}, {k:'Asana', v:'體位法'}], desc:'胸腔擴展如游魚浮水。' },
+  39: { roots: [{k:'Dhanura', v:'弓箭/拉弓'}, {k:'Asana', v:'體位法'}], desc:'趴姿抓腳踝後彎如緊繃之弓。' },
+  40: { roots: [{k:'Salabha', v:'蝗蟲/飛蝗'}, {k:'Asana', v:'體位法'}], desc:'強化背肌與臀腿的趴姿起飛式。' },
+  41: { roots: [{k:'Hala', v:'犁鋤/農犁'}, {k:'Asana', v:'體位法'}], desc:'雙腿翻過頭頂如農耕犁鋤。' },
+  42: { roots: [{k:'Sarva', v:'全部'}, {k:'Anga', v:'肢體/部位'}, {k:'Asana', v:'體位法'}], desc:'調和全身的全肢體肩倒立式。' },
+  43: { roots: [{k:'Setu', v:'橋樑'}, {k:'Bandha', v:'鎖定/建造'}, {k:'Asana', v:'體位法'}], desc:'抬臀挺胸如建造穩固橋樑。' },
+  44: { roots: [{k:'Chakra', v:'脈輪'}, {k:'Asana', v:'體位法'}], desc:'強度較高的深度後彎體式。' },
+  45: { roots: [{k:'Sirsa', v:'頭部'}, {k:'Asana', v:'體位法'}], desc:'體位法之王的頭倒立式。' },
+  46: { roots: [{k:'Bala', v:'嬰兒/孩童'}, {k:'Asana', v:'體位法'}], desc:'安穩平靜、徹底放鬆的嬰兒式。' },
+  47: { roots: [{k:'Pincha', v:'羽毛/孔雀尾'}, {k:'Mayura', v:'孔雀'}, {k:'Asana', v:'體位法'}], desc:'前臂平衡倒立如孔雀開屏起舞。' },
+  48: { roots: [{k:'Jathara', v:'腹部/胃'}, {k:'Parivartana', v:'旋轉/扭轉'}], desc:'仰臥雙腿側擺的腹部扭轉式。' },
+  49: { roots: [{k:'Sava/Shava', v:'屍體/完全靜止'}, {k:'Asana', v:'體位法'}], desc:'練習結尾深層身心臣服的大休息。' },
+  50: { roots: [{k:'Tada', v:'山峰/高山'}, {k:'Asana', v:'體位法'}], desc:'站姿的根本基石，穩如泰山。' }
+};
+
 /* ============================================================
    應用程式邏輯
    ============================================================ */
 const TOTAL_MC = 17, TOTAL_FILL = 3;
-let state = { screen:'intro', questions:[], current:0, answers:[], showBankModal: false, showAsanaModal: false };
+const GAME_TOTAL = 10; // 小遊戲每次出題數
+
+let state = { 
+  screen:'intro', 
+  questions:[], 
+  current:0, 
+  answers:[], 
+  showBankModal: false, 
+  showAsanaModal: false,
+  // 小遊戲專用狀態
+  gameQuestions: [],
+  gameCurrent: 0,
+  gameAnswers: [], // 記錄每題 { userPick: idx, ok: bool }
+  gameRevealed: false // 當前題目是否已點選並顯示字根拆解
+};
 
 function shuffle(arr){
   const a=[...arr];
@@ -517,6 +609,7 @@ function shuffle(arr){
 function normalize(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
 function normalizeNoSpace(s){ return normalize(s).replace(/\s+/g,''); }
 
+/* 啟動原有哲學模擬考 */
 function buildQuiz(){
   const mcPicks = shuffle(MC_BANK).slice(0, TOTAL_MC).map(q=>({...q, type:'mc'}));
   const fillPicks = shuffle(FILL_BANK).slice(0, TOTAL_FILL).map(q=>({...q, type:'fill', cat:'asana'}));
@@ -526,6 +619,51 @@ function buildQuiz(){
   state.answers = new Array(all.length).fill(null);
   state.screen = 'quiz';
   render();
+}
+
+/* 啟動 50 式隨機抽 10 題小遊戲 */
+function buildAsanaGame(){
+  const picks = shuffle(ASANA_LIST).slice(0, GAME_TOTAL);
+  state.gameQuestions = picks.map(item => {
+    // 正確選項
+    const correctSk = item.sk;
+    // 從其餘 49 式隨機選 3 個干擾項
+    const others = ASANA_LIST.filter(a => a.no !== item.no);
+    const distractorPicks = shuffle(others).slice(0, 3).map(a => a.sk);
+    const options = shuffle([correctSk, ...distractorPicks]);
+    return {
+      no: item.no,
+      cn: item.cn,
+      correctSk: correctSk,
+      options: options,
+      correctIndex: options.indexOf(correctSk)
+    };
+  });
+  state.gameCurrent = 0;
+  state.gameAnswers = new Array(GAME_TOTAL).fill(null);
+  state.gameRevealed = false;
+  state.screen = 'game';
+  render();
+}
+
+function selectGameOption(idx){
+  if(state.gameRevealed) return;
+  const q = state.gameQuestions[state.gameCurrent];
+  const isOk = (idx === q.correctIndex);
+  state.gameAnswers[state.gameCurrent] = { userPick: idx, ok: isOk };
+  state.gameRevealed = true;
+  render();
+}
+
+function nextGameQuestion(){
+  if(state.gameCurrent < GAME_TOTAL - 1){
+    state.gameCurrent++;
+    state.gameRevealed = false;
+    render();
+  } else {
+    state.screen = 'game_result';
+    render();
+  }
 }
 
 function selectMC(optIdx){
@@ -597,9 +735,156 @@ function renderIntro(){
       </div>
       <div style="margin-top:24px; display:flex; flex-direction:column; gap:10px;">
         <button class="btn" onclick="buildQuiz()">開始隨機模擬考</button>
+        <button class="btn" style="background:linear-gradient(135deg, #FFB300, #E65100);" onclick="buildAsanaGame()">🎮 體位法梵文拼音小遊戲</button>
         <button class="btn secondary" onclick="toggleBankModal(true)">瀏覽完整題庫 (${MC_BANK.length + FILL_BANK.length} 題)</button>
         <button class="btn secondary" onclick="toggleAsanaModal(true)">🔊 體位法發音練習 (${ASANA_LIST.length} 式)</button>
       </div>
+    </div>
+  `;
+}
+
+/* 渲染小遊戲作答畫面 */
+function renderAsanaGameScreen(){
+  const q = state.gameQuestions[state.gameCurrent];
+  const ans = state.gameAnswers[state.gameCurrent];
+  const total = GAME_TOTAL;
+  const rootData = ASANA_ROOTS[q.no] || { roots: [], desc: '' };
+
+  const beads = state.gameQuestions.map((_, i) => {
+    let cls = 'bead';
+    if(i === state.gameCurrent) cls += ' current';
+    else if(state.gameAnswers[i] !== null) cls += (state.gameAnswers[i].ok ? ' done' : '');
+    return `<div class="${cls}"></div>`;
+  }).join('');
+
+  let optionsHtml = q.options.map((opt, idx) => {
+    let extraClass = '';
+    if(state.gameRevealed){
+      extraClass += ' game-disabled';
+      if(idx === q.correctIndex) extraClass += ' game-correct';
+      else if(ans && ans.userPick === idx) extraClass += ' game-wrong';
+    }
+    return `
+      <div class="option ${extraClass}" onclick="selectGameOption(${idx})">
+        <div class="dot"></div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; font-weight:700;">${opt}</div>
+      </div>
+    `;
+  }).join('');
+
+  let breakdownHtml = '';
+  if(state.gameRevealed){
+    breakdownHtml = `
+      <div class="breakdown-box">
+        <div class="breakdown-title">
+          <span>${ans.ok ? '🎉 答對了！' : '💡 答錯囉！正確答案是：'} <strong>${q.correctSk}</strong></span>
+        </div>
+        <div class="breakdown-tags">
+          ${rootData.roots.map(r => `<span class="root-tag"><b>${r.k}</b>(${r.v})</span>`).join('')}
+        </div>
+        <div class="breakdown-desc">${rootData.desc}</div>
+        <button class="btn" style="margin-top:14px; padding:12px 16px; font-size:15px;" onclick="nextGameQuestion()">
+          ${state.gameCurrent === total - 1 ? '查看結算成績' : '下一題 →'}
+        </button>
+      </div>
+    `;
+  }
+
+  return `
+    <header class="app-header">
+      <div class="eyebrow"><span class="sun-mark"></span> ASANA SANSKRIT QUIZ</div>
+      <h1>體位法梵文挑戰</h1>
+      <p>看中文選出正確的梵文拼音 · 附字根拆解解析</p>
+    </header>
+
+    <div class="card">
+      <div class="mala">${beads}</div>
+      <div class="progress-label">第 ${state.gameCurrent + 1} / ${total} 題 · 已答對 ${state.gameAnswers.filter(a=>a&&a.ok).length} 題</div>
+      
+      <div class="q-meta">
+        <span class="q-cat">No.${q.no} 體位法</span>
+        <span class="q-num">四選一挑戰</span>
+      </div>
+      <div class="q-text" style="text-align:center; font-size:24px; color:var(--primary); margin:12px 0 24px;">
+        ${q.cn}
+      </div>
+
+      <div class="options">
+        ${optionsHtml}
+      </div>
+
+      ${breakdownHtml}
+
+      <div style="margin-top:20px; text-align:center;">
+        <a href="javascript:void(0)" onclick="restart()" style="font-size:13px; color:var(--ink-soft); text-decoration:underline;">結束練習並返回首頁</a>
+      </div>
+    </div>
+  `;
+}
+
+/* 渲染小遊戲結算畫面 */
+function renderAsanaGameResult(){
+  let correctCount = state.gameAnswers.filter(a => a && a.ok).length;
+  let score = correctCount * 10;
+
+  let verdict = '', verdictSub = '';
+  if(score === 100){
+    verdict = ' 滿分達成！梵文拼音大師！';
+    verdictSub = '太強了！您對 50 個體位法的梵文拼音與字根拆解已經瞭若指掌！';
+  } else if(score >= 70){
+    verdict = ' 非常優秀！掌握度極高';
+    verdictSub = '大部分的體位法梵文都難不倒你，持續隨機抽考強化記憶吧！';
+  } else {
+    verdict = ' 加油！多加練習字根拆解';
+    verdictSub = '透過字根（如 Pada=腳, Hasta=手, Sirsa=頭）來記憶會輕鬆很多喔！';
+  }
+
+  const reviewItems = state.gameQuestions.map((q, i) => {
+    const ans = state.gameAnswers[i];
+    const isOk = ans && ans.ok;
+    const rootData = ASANA_ROOTS[q.no] || { roots: [], desc: '' };
+    return `
+      <div class="review-item">
+        <div class="review-head">
+          <div class="review-mark ${isOk ? 'correct' : 'wrong'}">${isOk ? '✓' : '✕'}</div>
+          <div>
+            <div style="font-size:12px; color:var(--primary); font-weight:700;">No.${q.no} ${q.cn}</div>
+            <div class="review-q" style="font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:var(--ink);">${q.correctSk}</div>
+          </div>
+        </div>
+        <div class="review-body">
+          ${!isOk && ans ? `<div class="review-line your-wrong"><span class="tag">您的回答：</span><span class="val">${q.options[ans.userPick]}</span></div>` : ''}
+          <div class="review-line correct-ans"><span class="tag">字根拆解：</span><span class="val">${rootData.roots.map(r=>`${r.k}(${r.v})`).join(' + ')}</span></div>
+          <div class="review-explain">${rootData.desc}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <header class="app-header">
+      <div class="eyebrow"><span class="sun-mark"></span> ASANA QUIZ RESULT</div>
+      <h1>挑戰成果結算</h1>
+    </header>
+
+    <div class="card">
+      <div class="score-hero">
+        <div class="score-ring" style="--pct:${score}">
+          <div class="val">${score}<small>分</small></div>
+        </div>
+        <div class="verdict">${verdict}</div>
+        <div class="verdict-sub">本次抽考 10 題中答對了 ${correctCount} 題</div>
+      </div>
+
+      <div style="margin-top:24px; display:flex; flex-direction:column; gap:10px;">
+        <button class="btn" onclick="buildAsanaGame()">🔄 再抽 10 題挑戰一次</button>
+        <button class="btn secondary" onclick="restart()">返回首頁選單</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:18px; margin-bottom:16px;">本次題目與字根拆解回顧</h3>
+      ${reviewItems}
     </div>
   `;
 }
@@ -853,9 +1138,6 @@ function renderAsanaModal(){
               ⚠️ 第 ${noAudio.map(a=>a.no).join('、')} 式（${noAudio.map(a=>a.sk+' '+a.cn).join('、')}）尚未收錄於錄音中。
             </div>
           ` : ''}
-
-         
-            
           </div>
         </div>
       </div>
@@ -898,7 +1180,6 @@ function handleAsanaClick(no){
   if(!player) return;
 
   if(markMode){
-    // 標記模式：只記錄目前播放進度，不會跳轉／中斷播放
     if(!player.src.endsWith(item.file)){
       alert('請先播放「' + (item.file === AUDIO_FILE_1 ? '錄音一' : '錄音二') + '」，再於播放過程中點選體位法進行標記。');
       return;
@@ -909,7 +1190,6 @@ function handleAsanaClick(no){
     return;
   }
 
-  // 一般模式：跳轉到該體位法的時間點並播放
   if(!player.src.endsWith(item.file)) player.src = item.file;
   player.currentTime = item.start || 0;
   player.play();
@@ -953,6 +1233,8 @@ function render(){
   if(state.screen === 'intro') content = renderIntro();
   else if(state.screen === 'quiz') content = renderQuiz();
   else if(state.screen === 'result') content = renderResult();
+  else if(state.screen === 'game') content = renderAsanaGameScreen();
+  else if(state.screen === 'game_result') content = renderAsanaGameResult();
 
   app.innerHTML = content + renderBankModal() + renderAsanaModal() + `<footer class="note">Made by 8ana for 2026 Yoga Teacher Training · Philosophy Practice</footer>`;
 }
